@@ -1,0 +1,10 @@
+- name: DIKTAT_COMMON
+  configuration:
+    domainName: net.yewton.asobiba
+    kotlinVersion: 1.6.10
+- name: KDOC_WITHOUT_PARAM_TAG
+  enabled: false
+- name: KDOC_WITHOUT_RETURN_TAG
+  enabled: false
+- name: TRAILING_COMMA
+  enabled: false
