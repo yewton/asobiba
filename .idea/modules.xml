@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/asobiba.iml" filepath="$PROJECT_DIR$/.idea/asobiba.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/asobiba.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/asobiba.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/asobiba.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/asobiba.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/asobiba.app.test.iml" filepath="$PROJECT_DIR$/.idea/modules/app/asobiba.app.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/asobiba.buildSrc.iml" filepath="$PROJECT_DIR$/.idea/modules/asobiba.buildSrc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/asobiba.buildSrc.main.iml" filepath="$PROJECT_DIR$/.idea/modules/asobiba.buildSrc.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/asobiba.buildSrc.test.iml" filepath="$PROJECT_DIR$/.idea/modules/asobiba.buildSrc.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/list/asobiba.list.iml" filepath="$PROJECT_DIR$/.idea/modules/list/asobiba.list.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/list/asobiba.list.main.iml" filepath="$PROJECT_DIR$/.idea/modules/list/asobiba.list.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/list/asobiba.list.test.iml" filepath="$PROJECT_DIR$/.idea/modules/list/asobiba.list.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mondai/asobiba.mondai.iml" filepath="$PROJECT_DIR$/.idea/modules/mondai/asobiba.mondai.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mondai/asobiba.mondai.main.iml" filepath="$PROJECT_DIR$/.idea/modules/mondai/asobiba.mondai.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mondai/asobiba.mondai.test.iml" filepath="$PROJECT_DIR$/.idea/modules/mondai/asobiba.mondai.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/utilities/asobiba.utilities.iml" filepath="$PROJECT_DIR$/.idea/modules/utilities/asobiba.utilities.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/utilities/asobiba.utilities.main.iml" filepath="$PROJECT_DIR$/.idea/modules/utilities/asobiba.utilities.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/utilities/asobiba.utilities.test.iml" filepath="$PROJECT_DIR$/.idea/modules/utilities/asobiba.utilities.test.iml" />
+    </modules>
+  </component>
+</project>
