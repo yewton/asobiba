@@ -1,0 +1,23 @@
+[versions]
+java = "17"
+kotlin = "1.6.10"
+kotest = "5.1.0"
+
+[libraries]
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8" }
+
+spotless-plugin = { module = "com.diffplug.spotless:spotless-plugin-gradle", version = "6.2.0" }
+
+commons-text = { module = "org.apache.commons:commons-text", version = "1.9" }
+
+jetbrains-annotations = { module = "org.jetbrains:annotations", version = "16.0.2" }
+
+junit-bom = { module = "org.junit:junit-bom", version = "5.7.2" }
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
+
+kotest-runner-junit5 = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
+kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
+
+[bundles]
+kotest = ["kotest-runner-junit5", "kotest-assertions-core"]

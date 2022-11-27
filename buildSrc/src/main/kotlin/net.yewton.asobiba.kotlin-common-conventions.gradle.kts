@@ -11,16 +11,14 @@ plugins {
 }
 
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+    toolchain.languageVersion.set(JavaLanguageVersion.of(requiredVersionFromLibs("java")))
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = requiredVersionFromLibs("java")
     }
 }
-
-val kotestVersion by extra("5.1.0")
 
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -30,43 +28,53 @@ repositories {
 dependencies {
     constraints {
         // Define dependency versions as constraints
-        implementation("org.apache.commons:commons-text:1.9")
+        implementation(dependencyFromLibs("commons-text"))
 
-        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+        implementation(dependencyFromLibs("kotlin-stdlib-jdk8"))
     }
 
     // Align versions of all Kotlin components
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
 
     // Use the Kotlin JDK 8 standard library.
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation(dependencyFromLibs("kotlin-stdlib-jdk8"))
 
     // Align versions of all Kotlin components
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
 
-    implementation("org.jetbrains:annotations:16.0.2")
+    implementation(dependencyFromLibs("jetbrains-annotations"))
 
-    testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
-    testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
+    testImplementation(platform(dependencyFromLibs("junit-bom")))
+
+    testImplementation(bundleFromLibs("kotest"))
+}
+
+tasks.withType<Test>().configureEach {
+    useJUnitPlatform()
 }
 
 testing {
     suites {
         // Configure the built-in test suite
-        val test by getting(JvmTestSuite::class) {
+        getting(JvmTestSuite::class) {
             // Use JUnit Jupiter test framework
-            useJUnitJupiter("5.7.2")
+            useJUnitJupiter()
         }
     }
 }
 
-configure<com.diffplug.gradle.spotless.SpotlessExtension> {
-    java {
-        importOrder()
-        removeUnusedImports()
-        googleJavaFormat()
+spotless {
+    pluginManager.withPlugin("java") {
+        java {
+            importOrder()
+            removeUnusedImports()
+            googleJavaFormat()
+        }
     }
-    kotlin {
-        diktat().configFile("${rootDir}/diktat-analysis.yml")
+
+    pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
+        kotlin {
+            diktat().configFile("${rootDir}/diktat-analysis.yml")
+        }
     }
 }

@@ -15,10 +15,10 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10")
-    implementation("com.diffplug.spotless:spotless-plugin-gradle:6.2.0")
+    implementation(libs.kotlin.gradle.plugin)
+    implementation(libs.spotless.plugin)
 }
 
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+    toolchain.languageVersion.set(JavaLanguageVersion.of(libs.versions.java.get()))
 }
