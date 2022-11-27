@@ -161,3 +161,4 @@ gradle-app.setting
 .classpath
 
 
+/gradle/libs.versions.updates.toml
