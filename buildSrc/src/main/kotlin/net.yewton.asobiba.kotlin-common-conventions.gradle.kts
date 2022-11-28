@@ -64,6 +64,7 @@ testing {
 }
 
 spotless {
+    encoding("UTF-8")
     pluginManager.withPlugin("java") {
         java {
             importOrder()
@@ -78,3 +79,4 @@ spotless {
         }
     }
 }
+n
