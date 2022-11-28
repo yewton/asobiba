@@ -1,19 +1,20 @@
 [versions]
 # @keep 依存関係定義では使っていないけれど Java バージョン指定する箇所で参照してるので
 java = "17"
-kotest = "5.1.0"
+kotest = "5.5.4"
 kotlin = "1.6.10"
 
 [libraries]
+# @keep 敢えてこのバージョンにするというのが意図っぽいので( see https://github.com/gradle/gradle/blob/v7.6.0/subprojects/build-init/src/main/java/org/gradle/buildinit/plugins/internal/JvmProjectInitDescriptor.java#L214 )
 commons-text = "org.apache.commons:commons-text:1.9"
-jetbrains-annotations = "org.jetbrains:annotations:16.0.2"
-junit-bom = "org.junit:junit-bom:5.7.2"
+jetbrains-annotations = "org.jetbrains:annotations:23.0.0"
+junit-bom = "org.junit:junit-bom:5.9.1"
 kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
 kotest-runner-junit5 = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8" }
-# @keep なんでか知らんが versionCatalogUpdate --interactive 実行時に消えてしまうので
-spotless-plugin = "com.diffplug.spotless:spotless-plugin-gradle:6.2.0"
+# @keep buildSrc からの依存しか無い為に未使用扱いになってしまうぽいので( 多分関連する https://github.com/ben-manes/gradle-versions-plugin/issues/284 )
+spotless-plugin = "com.diffplug.spotless:spotless-plugin-gradle:6.12.0"
 
 [bundles]
 kotest = [
