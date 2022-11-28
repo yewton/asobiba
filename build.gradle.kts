@@ -6,4 +6,5 @@ plugins {
 
 tasks.dependencyUpdates {
     checkConstraints = true
+    checkForGradleUpdate = true
 }
