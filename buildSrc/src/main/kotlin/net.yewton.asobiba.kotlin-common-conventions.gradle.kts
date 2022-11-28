@@ -6,7 +6,7 @@
 
 plugins {
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
-    id("org.jetbrains.kotlin.jvm")
+    kotlin("jvm")
     id("com.diffplug.spotless")
 }
 
@@ -16,6 +16,7 @@ java {
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions {
+        freeCompilerArgs = listOf("-Xjsr305=strict")
         jvmTarget = requiredVersionFromLibs("java")
     }
 }
@@ -23,6 +24,14 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
+
+    maven {
+        url = uri("https://repo.spring.io/milestone")
+        content {
+            // Thymeleaf 3.1.0 uses 6.0.0-RC2 of Security's bom in its dependency management
+            includeModule("org.springframework.security", "spring-security-bom")
+        }
+    }
 }
 
 dependencies {
@@ -70,6 +79,7 @@ spotless {
             importOrder()
             removeUnusedImports()
             googleJavaFormat()
+            targetExclude("build/generated/**/*.java")
         }
     }
 

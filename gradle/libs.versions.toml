@@ -2,7 +2,7 @@
 # @keep 依存関係定義では使っていないけれど Java バージョン指定する箇所で参照してるので
 java = "17"
 kotest = "5.5.4"
-kotlin = "1.6.10"
+kotlin = "1.7.21"
 
 [libraries]
 # @keep 敢えてこのバージョンにするというのが意図っぽいので( see https://github.com/gradle/gradle/blob/v7.6.0/subprojects/build-init/src/main/java/org/gradle/buildinit/plugins/internal/JvmProjectInitDescriptor.java#L214 )
@@ -25,3 +25,7 @@ kotest = [
 [plugins]
 version-catalog-update = "nl.littlerobots.version-catalog-update:0.7.0"
 versions = "com.github.ben-manes.versions:0.44.0"
+spring-boot = "org.springframework.boot:3.0.0"
+spring-dependency-management = "io.spring.dependency-management:1.1.0"
+graalvm = "org.graalvm.buildtools.native:0.9.18"
+kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }

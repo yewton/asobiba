@@ -9,4 +9,4 @@
  */
 
 rootProject.name = "asobiba"
-include("app", "list", "utilities", "mondai")
+include("app", "list", "utilities", "mondai", "reactive-webapp")
