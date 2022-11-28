@@ -7,9 +7,9 @@ package net.yewton.asobiba.utilities
 import net.yewton.asobiba.list.LinkedList
 
 @Suppress(
-        "MISSING_KDOC_TOP_LEVEL",
-        "LOCAL_VARIABLE_EARLY_DECLARATION",
-        "KDOC_NO_EMPTY_TAGS"
+    "MISSING_KDOC_TOP_LEVEL",
+    "LOCAL_VARIABLE_EARLY_DECLARATION",
+    "KDOC_NO_EMPTY_TAGS"
 )
 class SplitUtils {
     companion object {

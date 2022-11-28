@@ -8,9 +8,9 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 @Suppress(
-        "MISSING_KDOC_TOP_LEVEL",
-        "AVOID_USING_UTILITY_CLASS",
-        "MISSING_KDOC_CLASS_ELEMENTS"
+    "MISSING_KDOC_TOP_LEVEL",
+    "AVOID_USING_UTILITY_CLASS",
+    "MISSING_KDOC_CLASS_ELEMENTS"
 )
 class MessageUtilsTest {
     @Test fun testGetMessage() {

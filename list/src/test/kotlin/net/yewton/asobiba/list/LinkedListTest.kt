@@ -10,10 +10,10 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 @Suppress(
-        "MISSING_KDOC_TOP_LEVEL",
-        "KDOC_NO_EMPTY_TAGS",
-        "MISSING_KDOC_CLASS_ELEMENTS",
-        "MISSING_KDOC_ON_FUNCTION"
+    "MISSING_KDOC_TOP_LEVEL",
+    "KDOC_NO_EMPTY_TAGS",
+    "MISSING_KDOC_CLASS_ELEMENTS",
+    "MISSING_KDOC_ON_FUNCTION"
 )
 class LinkedListTest {
     @Test fun testConstructor() {

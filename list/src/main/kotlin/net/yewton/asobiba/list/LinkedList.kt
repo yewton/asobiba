@@ -5,10 +5,10 @@
 package net.yewton.asobiba.list
 
 @Suppress(
-        "MISSING_KDOC_TOP_LEVEL",
-        "KDOC_NO_EMPTY_TAGS",
-        "MISSING_KDOC_CLASS_ELEMENTS",
-        "MISSING_KDOC_ON_FUNCTION"
+    "MISSING_KDOC_TOP_LEVEL",
+    "KDOC_NO_EMPTY_TAGS",
+    "MISSING_KDOC_CLASS_ELEMENTS",
+    "MISSING_KDOC_ON_FUNCTION"
 )
 class LinkedList {
     private var head: Node? = null
@@ -20,9 +20,9 @@ class LinkedList {
         it?.let {
             it.next = newNode
         }
-                ?: run {
-                    head = newNode
-                }
+            ?: run {
+                head = newNode
+            }
     }
 
     private fun tail(head: Node?): Node? {
