@@ -2,12 +2,12 @@
 # @keep 依存関係定義では使っていないけれど Java バージョン指定する箇所で参照してるので
 java = "17"
 kotest = "5.5.4"
-kotlin = "1.7.21"
+kotlin = "1.7.22"
 
 [libraries]
 # @pin 敢えてこのバージョンにするというのが意図っぽいので( see https://github.com/gradle/gradle/blob/v7.6.0/subprojects/build-init/src/main/java/org/gradle/buildinit/plugins/internal/JvmProjectInitDescriptor.java#L214 )
 commons-text = "org.apache.commons:commons-text:1.9"
-jetbrains-annotations = "org.jetbrains:annotations:23.0.0"
+jetbrains-annotations = "org.jetbrains:annotations:23.1.0"
 junit-bom = "org.junit:junit-bom:5.9.1"
 kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
 kotest-runner-junit5 = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
@@ -24,9 +24,9 @@ kotest = [
 ]
 
 [plugins]
-version-catalog-update = "nl.littlerobots.version-catalog-update:0.7.0"
-versions = "com.github.ben-manes.versions:0.44.0"
+graalvm = "org.graalvm.buildtools.native:0.9.19"
+kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
 spring-boot = "org.springframework.boot:3.0.0"
 spring-dependency-management = "io.spring.dependency-management:1.1.0"
-graalvm = "org.graalvm.buildtools.native:0.9.18"
-kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
+version-catalog-update = "nl.littlerobots.version-catalog-update:0.7.0"
+versions = "com.github.ben-manes.versions:0.44.0"
