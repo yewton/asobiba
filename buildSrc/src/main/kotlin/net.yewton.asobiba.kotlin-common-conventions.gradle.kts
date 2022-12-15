@@ -29,6 +29,8 @@ repositories {
         url = uri("https://repo.spring.io/milestone")
         content {
             // Thymeleaf 3.1.0 uses 6.0.0-RC2 of Security's bom in its dependency management
+            // https://github.com/spring-projects/spring-boot/issues/33486 で解消予定
+            // 3.0.1 の進捗 https://github.com/spring-projects/spring-boot/milestone/280
             includeModule("org.springframework.security", "spring-security-bom")
         }
     }
