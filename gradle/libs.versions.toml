@@ -5,12 +5,13 @@ kotest = "5.5.4"
 kotlin = "1.7.21"
 
 [libraries]
-# @keep 敢えてこのバージョンにするというのが意図っぽいので( see https://github.com/gradle/gradle/blob/v7.6.0/subprojects/build-init/src/main/java/org/gradle/buildinit/plugins/internal/JvmProjectInitDescriptor.java#L214 )
+# @pin 敢えてこのバージョンにするというのが意図っぽいので( see https://github.com/gradle/gradle/blob/v7.6.0/subprojects/build-init/src/main/java/org/gradle/buildinit/plugins/internal/JvmProjectInitDescriptor.java#L214 )
 commons-text = "org.apache.commons:commons-text:1.9"
 jetbrains-annotations = "org.jetbrains:annotations:23.0.0"
 junit-bom = "org.junit:junit-bom:5.9.1"
 kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
 kotest-runner-junit5 = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
+# @keep spotless-plugin と同様？ versionCatalogUpdate で消されてしまう為
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8" }
 # @keep buildSrc からの依存しか無い為に未使用扱いになってしまうぽいので( 多分関連する https://github.com/ben-manes/gradle-versions-plugin/issues/284 )
