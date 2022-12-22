@@ -6,7 +6,7 @@ kotlin = "1.7.22"
 
 [libraries]
 # @pin 敢えてこのバージョンにするというのが意図っぽいので( see https://github.com/gradle/gradle/blob/v7.6.0/subprojects/build-init/src/main/java/org/gradle/buildinit/plugins/internal/JvmProjectInitDescriptor.java#L214 )
-commons-text = "org.apache.commons:commons-text:1.9"
+commons-text = "org.apache.commons:commons-text:1.10.0"
 jetbrains-annotations = "org.jetbrains:annotations:23.1.0"
 junit-bom = "org.junit:junit-bom:5.9.1"
 kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
