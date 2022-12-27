@@ -3,7 +3,7 @@ plugins {
 	id("net.yewton.asobiba.kotlin-common-conventions")
 	alias(libs.plugins.spring.boot)
 	alias(libs.plugins.spring.dependency.management)
-	alias(libs.plugins.graalvm)
+	// alias(libs.plugins.graalvm)
 	alias(libs.plugins.kotlin.spring)
 }
 
@@ -22,13 +22,11 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
-	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("io.micrometer:micrometer-tracing-bridge-brave")
 	implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
 	implementation("io.zipkin.reporter2:zipkin-reporter-brave")
-	implementation("org.flywaydb:flyway-core")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
