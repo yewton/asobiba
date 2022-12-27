@@ -18,16 +18,27 @@ import java.util.UUID
 @RequestMapping("/things")
 class ThingController(private val thingRepository: ThingRepository,
                       private val reactiveStringRedisTemplate: ReactiveStringRedisTemplate) {
-
+    /**
+     * @param id
+     * @return
+     */
     @GetMapping("/{id}")
     suspend fun get(@PathVariable id: UUID): Thing = thingRepository.findById(id)
         ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
 
+    /**
+     * @param id
+     * @return
+     */
     @GetMapping("/fromRedis/{id}")
     suspend fun getFromRedis(@PathVariable id: UUID): String =
         reactiveStringRedisTemplate.opsForValue().getAndAwait(id.toString())
             ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
 
+    /**
+     * @param thing
+     * @return
+     */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     suspend fun add(@RequestBody thing: Thing): Thing {

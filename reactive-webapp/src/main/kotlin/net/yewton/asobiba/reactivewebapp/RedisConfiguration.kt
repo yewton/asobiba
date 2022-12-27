@@ -7,6 +7,10 @@ import org.springframework.data.redis.core.ReactiveStringRedisTemplate
 
 @Configuration
 internal class RedisConfiguration {
+    /**
+     * @param factory
+     * @return
+     */
     @Bean
     fun reactiveRedisTemplate(factory: ReactiveRedisConnectionFactory):
     ReactiveStringRedisTemplate = ReactiveStringRedisTemplate(factory)
