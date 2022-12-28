@@ -79,6 +79,9 @@ spotless {
         kotlin {
             diktat().configFile("${rootDir}/diktat-analysis.yml")
         }
+        kotlinGradle {
+            diktat().configFile("${rootDir}/diktat-analysis.yml")
+        }
     }
 }
 

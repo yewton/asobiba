@@ -4,7 +4,6 @@
 
 package net.yewton.asobiba.app
 
-@Suppress("MISSING_KDOC_TOP_LEVEL")
 class MessageUtils {
     companion object {
         /**

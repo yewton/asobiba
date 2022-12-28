@@ -13,10 +13,6 @@ import org.springframework.security.web.server.util.matcher.PathPatternParserSer
 @Configuration
 @EnableWebFluxSecurity
 class SecurityConfig {
-    /**
-     * @param http
-     * @return
-     */
     @Bean
     fun springSecurityFilterChain(http: ServerHttpSecurity): SecurityWebFilterChain = http {
         csrf {

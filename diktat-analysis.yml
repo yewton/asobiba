@@ -6,11 +6,15 @@
   enabled: false
 - name: KDOC_WITHOUT_RETURN_TAG
   enabled: false
+- name: KDOC_WITHOUT_THROWS_TAG
+  enabled: false
 - name: TRAILING_COMMA
+  enabled: false
+- name: MISSING_KDOC_ON_FUNCTION
   enabled: false
 - name: MISSING_KDOC_TOP_LEVEL
   enabled: false
-- name: KDOC_NO_EMPTY_TAGS
-  enabled: false
 - name: MISSING_KDOC_CLASS_ELEMENTS
   enabled: false
+- name: RUN_IN_SCRIPT
+  enabled: false # https://github.com/saveourtool/diktat/issues/1272

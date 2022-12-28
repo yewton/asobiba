@@ -6,17 +6,9 @@ package net.yewton.asobiba.utilities
 
 import net.yewton.asobiba.list.LinkedList
 
-@Suppress(
-    "MISSING_KDOC_TOP_LEVEL",
-    "LOCAL_VARIABLE_EARLY_DECLARATION",
-    "KDOC_NO_EMPTY_TAGS"
-)
 class SplitUtils {
     companion object {
-        /**
-         * @param source
-         * @return
-         */
+        @Suppress("LOCAL_VARIABLE_EARLY_DECLARATION")
         fun split(source: String): LinkedList {
             var lastFind = 0
             val result = LinkedList()
