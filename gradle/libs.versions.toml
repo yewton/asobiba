@@ -11,6 +11,7 @@ jetbrains-annotations = "org.jetbrains:annotations:23.1.0"
 junit-bom = "org.junit:junit-bom:5.9.1"
 kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
 kotest-runner-junit5 = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
+kotest-extensions-spring = "io.kotest.extensions:kotest-extensions-spring:1.1.2"
 # @keep spotless-plugin と同様？ versionCatalogUpdate で消されてしまう為
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-stdlib-jdk8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8" }

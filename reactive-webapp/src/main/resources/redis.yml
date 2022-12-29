@@ -1,0 +1,12 @@
+---
+spring:
+  config.activate.on-profile: local
+  data.redis:
+      host: 127.0.0.1
+      port: 16379
+---
+spring:
+  config.activate.on-profile: production
+  data.redis:
+    host: prod.yewton.net
+    port: 6379

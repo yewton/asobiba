@@ -1,0 +1,10 @@
+---
+spring:
+  config.activate.on-profile: local
+  r2dbc:
+    url: r2dbc:postgresql://postgres:mysecretpassword@127.0.0.1:15432/asobiba
+---
+spring:
+  config.activate.on-profile: production
+  r2dbc:
+    url: r2dbc:postgresql://postgres:myprodpassword@prod.yewton.net:5432/asobiba

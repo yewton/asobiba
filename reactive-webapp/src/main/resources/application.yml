@@ -1,7 +1,7 @@
 spring:
-  r2dbc:
-    url: r2dbc:postgresql://postgres:mysecretpassword@127.0.0.1:15432/asobiba
-  data:
-    redis:
-      host: 127.0.0.1
-      port: 16379
+  profiles:
+    active: local
+  config:
+    import:
+      - r2dbc.yml
+      - redis.yml
