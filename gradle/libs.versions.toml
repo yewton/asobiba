@@ -2,7 +2,7 @@
 # @keep 依存関係定義では使っていないけれど Java バージョン指定する箇所で参照してるので
 java = "17"
 kotest = "5.5.4"
-kotlin = "1.7.22"
+kotlin = "1.8.0"
 
 [libraries]
 # @pin 敢えてこのバージョンにするというのが意図っぽいので( see https://github.com/gradle/gradle/blob/v7.6.0/subprojects/build-init/src/main/java/org/gradle/buildinit/plugins/internal/JvmProjectInitDescriptor.java#L214 )
