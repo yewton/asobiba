@@ -1,6 +1,6 @@
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once https://github.com/gradle/gradle/issues/22797 is fixed
 plugins {
-    id("net.yewton.asobiba.kotlin-common-conventions")
+    net.yewton.asobiba.`kotlin-common-conventions`
     alias(libs.plugins.spring.boot)
     alias(libs.plugins.spring.dependency.management)
     // alias(libs.plugins.graalvm)

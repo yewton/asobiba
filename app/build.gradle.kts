@@ -5,7 +5,7 @@
  */
 
 plugins {
-    id("net.yewton.asobiba.kotlin-application-conventions")
+    net.yewton.asobiba.`kotlin-application-conventions`
 }
 
 dependencies {
