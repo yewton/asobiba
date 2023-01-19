@@ -1,22 +1,26 @@
-@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once https://github.com/gradle/gradle/issues/22797 is fixed
-plugins {
-    alias(libs.plugins.versions)
-    alias(libs.plugins.version.catalog.update)
+val excludeProjects = listOf("build-logic", "platforms")
+val subProjects = gradle.includedBuilds.map { it.name }.filterNot { excludeProjects.contains(it) }
+
+tasks.register("buildAll") {
+    group = "build"
+    description = "Run all builds"
+    subProjects.forEach {
+        dependsOn(gradle.includedBuild(it).task(":buildAll"))
+    }
 }
 
-tasks.dependencyUpdates {
-    checkConstraints = true
-    checkForGradleUpdate = true
-    resolutionStrategy {
-        componentSelection {
-            all {
-                val rejected = listOf("alpha", "beta", "rc", "cr", "m", "preview", "b", "ea")
-                        .map { qualifier -> Regex("(?i).*[.-]$qualifier[.\\d-+]*") }
-                        .any { it.matches(candidate.version) }
-                if (rejected) {
-                    reject("Release candidate")
-                }
-            }
-        }
+tasks.register("checkAll") {
+    group = "verification"
+    description = "Run all checks"
+    subProjects.forEach {
+        dependsOn(gradle.includedBuild(it).task(":checkAll"))
+    }
+}
+
+tasks.register("cleanAll") {
+    group = "build"
+    description = "Run clean for all"
+    subProjects.forEach {
+        dependsOn(gradle.includedBuild(it).task(":cleanAll"))
     }
 }

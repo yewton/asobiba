@@ -1,0 +1,22 @@
+[versions]
+kotest = "5.5.4"
+kotlin = "1.8.0"
+
+[libraries]
+# @pin 敢えてこのバージョンにするというのが意図っぽいので( see https://github.com/gradle/gradle/blob/v7.6.0/subprojects/build-init/src/main/java/org/gradle/buildinit/plugins/internal/JvmProjectInitDescriptor.java#L214 )
+commons-text = "org.apache.commons:commons-text:1.9"
+jetbrains-annotations = "org.jetbrains:annotations:24.0.0"
+junit-bom = "org.junit:junit-bom:5.9.2"
+kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
+kotest-extensions-spring = "io.kotest.extensions:kotest-extensions-spring:1.1.2"
+kotest-runner-junit5 = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
+kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin" }
+kotlin-jvm-gradle-plugin = { module = "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin", version.ref = "kotlin" }
+kotlin-spring-plugin = { module = "org.jetbrains.kotlin.plugin.spring:org.jetbrains.kotlin.plugin.spring.gradle.plugin", version.ref = "kotlin" }
+spotless-plugin = "com.diffplug.spotless:spotless-plugin-gradle:6.13.0"
+spring-boot-plugin = "org.springframework.boot:org.springframework.boot.gradle.plugin:3.0.1"
+spring-dependency-management-plugin = "io.spring.dependency-management:io.spring.dependency-management.gradle.plugin:1.1.0"
+
+[plugins]
+version-catalog-update = "nl.littlerobots.version-catalog-update:0.7.0"
+versions = "com.github.ben-manes.versions:0.44.0"
