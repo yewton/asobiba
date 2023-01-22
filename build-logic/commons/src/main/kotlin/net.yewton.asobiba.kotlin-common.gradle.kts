@@ -30,8 +30,6 @@ dependencies {
     testImplementation(platform("net.yewton.asobiba.platform:test-platform"))
     detektPlugins(platform("net.yewton.asobiba.platform:detekt-plugins-platform"))
 
-    // Use the Kotlin JDK 8 standard library.
-    implementation(kotlin("stdlib-jdk8"))
     implementation("org.jetbrains:annotations")
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting")
 
