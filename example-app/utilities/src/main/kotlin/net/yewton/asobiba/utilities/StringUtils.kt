@@ -6,6 +6,7 @@ package net.yewton.asobiba.utilities
 
 import net.yewton.asobiba.list.LinkedList
 
+@Suppress("UtilityClassWithPublicConstructor")
 class StringUtils {
     companion object {
         fun join(source: LinkedList): String = JoinUtils.join(source)

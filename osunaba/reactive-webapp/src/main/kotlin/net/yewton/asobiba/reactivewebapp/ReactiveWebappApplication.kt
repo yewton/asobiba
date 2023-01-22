@@ -7,5 +7,6 @@ import org.springframework.boot.runApplication
 class ReactiveWebappApplication
 
 fun main(args: Array<String>) {
+    @Suppress("SpreadOperator")
     runApplication<ReactiveWebappApplication>(*args)
 }

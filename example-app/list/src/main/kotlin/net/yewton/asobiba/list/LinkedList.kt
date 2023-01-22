@@ -30,7 +30,6 @@ class LinkedList {
         return it
     }
 
-    @Suppress("FUNCTION_BOOLEAN_PREFIX")
     fun remove(element: String): Boolean {
         var result = false
         var previousIt: Node? = null

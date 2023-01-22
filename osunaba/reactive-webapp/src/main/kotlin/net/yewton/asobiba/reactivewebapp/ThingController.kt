@@ -16,8 +16,10 @@ import java.util.UUID
 
 @RestController
 @RequestMapping("/things")
-class ThingController(private val thingRepository: ThingRepository,
-                      private val reactiveStringRedisTemplate: ReactiveStringRedisTemplate) {
+class ThingController(
+    private val thingRepository: ThingRepository,
+    private val reactiveStringRedisTemplate: ReactiveStringRedisTemplate
+) {
     @GetMapping("/{id}")
     suspend fun get(@PathVariable id: UUID): Thing = thingRepository.findById(id)
         ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)

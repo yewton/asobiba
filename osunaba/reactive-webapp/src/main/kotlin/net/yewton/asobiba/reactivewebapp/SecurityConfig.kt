@@ -19,7 +19,9 @@ class SecurityConfig {
             requireCsrfProtectionMatcher = NegatedServerWebExchangeMatcher(
                 OrServerWebExchangeMatcher(
                     PathPatternParserServerWebExchangeMatcher("/things"),
-                    PathPatternParserServerWebExchangeMatcher("/things/**")))
+                    PathPatternParserServerWebExchangeMatcher("/things/**")
+                )
+            )
         }
         authorizeExchange {
             authorize("/**", permitAll)

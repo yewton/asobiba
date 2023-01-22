@@ -6,9 +6,9 @@ package net.yewton.asobiba.utilities
 
 import net.yewton.asobiba.list.LinkedList
 
+@Suppress("UtilityClassWithPublicConstructor")
 class SplitUtils {
     companion object {
-        @Suppress("LOCAL_VARIABLE_EARLY_DECLARATION")
         fun split(source: String): LinkedList {
             var lastFind = 0
             val result = LinkedList()
