@@ -8,6 +8,7 @@ dependencies {
     constraints {
         api(libs.kotlin.jvm.gradle.plugin)
         api(libs.spotless.plugin)
+        api(libs.detekt.plugin)
         api(libs.kotlin.spring.plugin)
         api(libs.spring.boot.plugin)
         api(libs.spring.dependency.management.plugin)

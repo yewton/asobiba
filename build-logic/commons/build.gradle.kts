@@ -13,6 +13,7 @@ dependencies {
     implementation(platform("net.yewton.asobiba.platform:plugins-platform"))
 
     implementation("org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin")
+    implementation("io.gitlab.arturbosch.detekt:detekt-gradle-plugin")
     implementation("com.diffplug.spotless:spotless-plugin-gradle")
     implementation("org.springframework.boot:org.springframework.boot.gradle.plugin")
     implementation("org.jetbrains.kotlin.plugin.spring:org.jetbrains.kotlin.plugin.spring.gradle.plugin")

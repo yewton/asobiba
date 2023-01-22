@@ -1,10 +1,13 @@
 [versions]
+detekt = "1.22.0"
 kotest = "5.5.4"
 kotlin = "1.8.0"
 
 [libraries]
 # @pin 敢えてこのバージョンにするというのが意図っぽいので( see https://github.com/gradle/gradle/blob/v7.6.0/subprojects/build-init/src/main/java/org/gradle/buildinit/plugins/internal/JvmProjectInitDescriptor.java#L214 )
 commons-text = "org.apache.commons:commons-text:1.9"
+detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
+detekt-plugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
 jetbrains-annotations = "org.jetbrains:annotations:24.0.0"
 junit-bom = "org.junit:junit-bom:5.9.2"
 kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }

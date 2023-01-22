@@ -10,3 +10,4 @@ rootProject.name = "platforms"
 include("product-platform")
 include("test-platform")
 include("plugins-platform")
+include("detekt-plugins-platform")
