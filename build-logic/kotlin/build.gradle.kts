@@ -12,5 +12,7 @@ plugins {
 dependencies {
     implementation(platform("net.yewton.asobiba.platform:plugins-platform"))
 
-    implementation("com.diffplug.spotless:spotless-plugin-gradle")
+    implementation(project(":commons"))
+    implementation("org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin")
+    implementation("io.gitlab.arturbosch.detekt:detekt-gradle-plugin")
 }
