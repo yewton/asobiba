@@ -12,3 +12,7 @@ dependencies {
     testImplementation("io.kotest:kotest-assertions-core")
     testImplementation("io.kotest:kotest-runner-junit5")
 }
+
+kotlin {
+    jvmToolchain(17)
+}
