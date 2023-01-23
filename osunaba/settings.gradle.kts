@@ -17,4 +17,5 @@ includeBuild("../platforms")
 // == Define the inner structure of this component ==
 rootProject.name = "osunaba" // the component name
 include("mondai")
+include("challenge")
 include("reactive-webapp")
