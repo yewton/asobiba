@@ -6,3 +6,4 @@ includeBuild("build-logic")
 
 includeBuild("osunaba")
 includeBuild("example-app")
+includeBuild("nanka")
