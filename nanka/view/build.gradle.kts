@@ -1,3 +1,8 @@
+import org.springframework.boot.gradle.plugin.ResolveMainClassName
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+import org.springframework.boot.gradle.tasks.bundling.BootJar
+import org.springframework.boot.gradle.tasks.run.BootRun
+
 plugins {
     id("net.yewton.asobiba.kotlin-spring-boot")
 }
@@ -30,6 +35,14 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
-tasks.getByName<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
-    enabled = false
+tasks.named<BootJar>(SpringBootPlugin.BOOT_JAR_TASK_NAME) {
+    classpath = preview.compileClasspath
+}
+
+tasks.named<BootRun>("bootRun") {
+    classpath = preview.runtimeClasspath
+}
+
+tasks.named<ResolveMainClassName>(SpringBootPlugin.RESOLVE_MAIN_CLASS_NAME_TASK_NAME) {
+    classpath = preview.runtimeClasspath
 }
