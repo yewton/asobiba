@@ -1,0 +1,10 @@
+# ビルド時( processPreviewResources 時 )に expand 処理される
+templates-dir: "${projectDir}/src/main/resources/templates"
+spring:
+  devtools:
+    restart:
+      additional-paths: "\${templates-dir}"
+      # ↑からの相対パスでマッチするように指定する必要がある
+      additional-exclude: "**/*.html"
+  thymeleaf:
+    prefix: "file:\${templates-dir}/"

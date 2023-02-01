@@ -46,3 +46,14 @@ tasks.named<BootRun>("bootRun") {
 tasks.named<ResolveMainClassName>(SpringBootPlugin.RESOLVE_MAIN_CLASS_NAME_TASK_NAME) {
     classpath = preview.runtimeClasspath
 }
+
+@Suppress("UnstableApiUsage")
+tasks.named<ProcessResources>("processPreviewResources") {
+    filesMatching("**/application.yml") {
+        expand(
+            // 相対パス指定は実行ディレクトリによって意味が変わってしまう為、
+            // プロジェクトのディレクトリを使って絶対パス指定できるようにする
+            "projectDir" to projectDir
+        )
+    }
+}
