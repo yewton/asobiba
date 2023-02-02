@@ -1,7 +1,7 @@
 [versions]
 detekt = "1.22.0"
 kotest = "5.5.4"
-kotlin = "1.8.0"
+kotlin = "1.8.10"
 
 [libraries]
 # @pin 敢えてこのバージョンにするというのが意図っぽいので( see https://github.com/gradle/gradle/blob/v7.6.0/subprojects/build-init/src/main/java/org/gradle/buildinit/plugins/internal/JvmProjectInitDescriptor.java#L214 )
