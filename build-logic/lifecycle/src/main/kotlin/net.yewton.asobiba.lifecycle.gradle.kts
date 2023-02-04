@@ -6,6 +6,10 @@ listOf(("build" to "build"),
     tasks.register("${task}All") {
         group = groupName
         description = "${task.capitalize()} all of the '${project.name}' component"
-        dependsOn(subprojects.map { ":${it.name}:${task}"} )
+        dependsOn(provider {
+            subprojects.mapNotNull {
+                it.tasks.findByName(task)
+            }
+        })
     }
 }
