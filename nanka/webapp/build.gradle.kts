@@ -1,3 +1,6 @@
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+import org.springframework.boot.gradle.tasks.bundling.BootJar
+
 plugins {
     id("net.yewton.asobiba.kotlin-spring-boot")
 }
@@ -20,4 +23,8 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+}
+
+tasks.named<BootJar>(SpringBootPlugin.BOOT_JAR_TASK_NAME) {
+    launchScript()
 }

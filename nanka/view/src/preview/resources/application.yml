@@ -1,10 +1,21 @@
 # ビルド時( processPreviewResources 時 )に expand 処理される
-templates-dir: "${projectDir}/src/main/resources/templates"
+resources-dir: "${projectDir}/src/main/resources"
+templates-dir: "\${resources-dir}/templates"
+static-dir: "\${resources-dir}/static"
 spring:
   devtools:
     restart:
-      additional-paths: "\${templates-dir}"
+      additional-paths:
+        - "\${templates-dir}"
+        - "\${static-dir}"
       # ↑からの相対パスでマッチするように指定する必要がある
-      additional-exclude: "**/*.html"
+      additional-exclude:
+        - "**/*.html"
+        - "**/*.css"
+        - "**/*.js"
+        - "**/*.js.map"
   thymeleaf:
     prefix: "file:\${templates-dir}/"
+  web:
+    resources:
+      static-locations: "file:\${static-dir}/"

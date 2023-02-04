@@ -12,5 +12,6 @@ dependencies {
         api(libs.kotlin.spring.plugin)
         api(libs.spring.boot.plugin)
         api(libs.spring.dependency.management.plugin)
+        api(libs.node.plugin)
     }
 }

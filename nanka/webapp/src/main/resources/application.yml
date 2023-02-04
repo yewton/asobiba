@@ -1,0 +1,7 @@
+spring:
+  web:
+    resources:
+      chain.strategy:
+        content:
+          enabled: true
+          paths: "/**"
