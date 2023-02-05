@@ -1,6 +1,6 @@
 [versions]
 detekt = "1.22.0"
-kotest = "5.5.4"
+kotest = "5.5.5"
 kotlin = "1.8.0"
 
 [libraries]
