@@ -3,6 +3,7 @@ import net.yewton.asobiba.gradle.ViteTask
 plugins {
     id("net.yewton.asobiba.kotlin-spring-boot-application")
     id("net.yewton.asobiba.vite")
+    id("net.yewton.asobiba.spotless-node")
 }
 
 group = "$group.nanka"

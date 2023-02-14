@@ -1,10 +1,10 @@
-import 'vite/modulepreload-polyfill'
+import 'vite/modulepreload-polyfill';
 
-import {updateAuthStatus} from "./auth";
-import {setupLogoutButton} from "./logout";
+import { updateAuthStatus } from './auth';
+import { setupLogoutButton } from './logout';
 
 setupLogoutButton();
 
 (async () => {
-    await updateAuthStatus();
+  await updateAuthStatus();
 })();

@@ -1,5 +1,6 @@
 plugins {
     id("net.yewton.asobiba.kotlin-spring-boot-application")
+    id("net.yewton.asobiba.spotless-node")
     id("net.yewton.asobiba.vite")
 }
 

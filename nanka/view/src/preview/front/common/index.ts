@@ -1,8 +1,8 @@
-import 'vite/modulepreload-polyfill'
+import 'vite/modulepreload-polyfill';
 
-import 'bootstrap'
+import 'bootstrap';
 
-const debugButton = document.getElementById('#debug-button')
+const debugButton = document.getElementById('#debug-button');
 
 debugButton.onclick = () => {
 
