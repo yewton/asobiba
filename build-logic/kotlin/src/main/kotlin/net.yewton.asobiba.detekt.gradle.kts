@@ -2,6 +2,7 @@ import io.gitlab.arturbosch.detekt.Detekt
 
 plugins {
     id("io.gitlab.arturbosch.detekt")
+    kotlin
 }
 
 dependencies {
@@ -15,10 +16,11 @@ tasks.register<Detekt>("detektAndCorrect") {
 }
 
 tasks.withType<Detekt>().configureEach {
-    setSource(projectDir)
+    setSource(files(
+            project.sourceSets.map { it.kotlin.srcDirs },
+            projectDir.listFiles { file -> file.name.matches(Regex(""".*\.kts?$""")) }))
     config.setFrom(files("${rootDir.parent}/config/detekt/detekt.yml"))
-    basePath = rootDir.absolutePath
     buildUponDefaultConfig = true
-    exclude("build/")
+    basePath = projectDir.absolutePath
     include("**/*.kt", "**/*.kts")
 }

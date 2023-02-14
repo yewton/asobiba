@@ -13,6 +13,7 @@ spotless {
                 "**/*.properties",
                 "**/*.yml"
         )
+        targetExclude("node_modules/**/*", ".gradle/**/*")
         trimTrailingWhitespace()
         endWithNewline()
     }
