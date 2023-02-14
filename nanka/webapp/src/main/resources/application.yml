@@ -1,7 +1,18 @@
 spring:
+  config:
+    import:
+      - "optional:classpath:/secrets/properties.yml"
   web:
     resources:
       chain.strategy:
         content:
           enabled: true
-          paths: "/**"
+          paths:
+            - "assets/**"
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            clientId: FIXME
+            clientSecret: FIXME

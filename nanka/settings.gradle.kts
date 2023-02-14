@@ -13,6 +13,7 @@ dependencyResolutionManagement {
     }
 }
 includeBuild("../platforms")
+includeBuild("../spring-boot-libs")
 
 // == Define the inner structure of this component ==
 rootProject.name = "nanka" // the component name

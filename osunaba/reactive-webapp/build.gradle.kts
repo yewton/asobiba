@@ -1,5 +1,5 @@
 plugins {
-    id("net.yewton.asobiba.kotlin-spring-boot")
+    id("net.yewton.asobiba.kotlin-spring-boot-application")
 }
 
 configurations {

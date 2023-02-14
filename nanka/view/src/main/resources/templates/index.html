@@ -1,15 +1,18 @@
 <!--/* @thymesVar id="nanka" type="net.yewton.asobiba.nanka.web.Nanka" */-->
+<!--/* @thymesVar id="csrf" type="net.yewton.asobiba.nanka.web.Csrf" */-->
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ja">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" th:href="@{/main.css}"/>
+    <meta name="_csrf" th:content="${csrf.token}"/>
+    <meta name="_csrf_header" th:content="${csrf.headerName}"/>
+    <link rel="stylesheet" th:href="@{/front/main.css}"/>
     <title>Hello, World!</title>
 </head>
 <body>
 <div class="px-4 py-5 my-5 text-center">
-    <img class="d-block mx-auto mb-4" src="https://place-hold.it/72x57" alt="" width="72" height="57">
+    <img class="d-block mx-auto mb-4" th:src="@{/assets/lenna.png}" alt="" width="100" height="100">
     <h1 class="display-5 fw-bold" th:text="${nanka.hoge} + ', ' + ${nanka.fuga}">Centered hero</h1>
     <div class="col-lg-6 mx-auto">
         <p class="lead mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most
@@ -21,9 +24,19 @@
                 Primary button
             </button>
             <button type="button" class="btn btn-outline-secondary btn-lg px-4">Secondary</button>
+            <div class="container unauthenticated">
+                With GitHub: <a th:href="@{/oauth2/authorization/github}">click here</a>
+            </div>
+            <div class="container authenticated" style="display:none">
+                Logged in as: <span id="user"></span>
+                <div>
+                    <button type="button" id="button-logout" class="btn btn-primary">Logout</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<script type="module" th:src="@{/main.js}"></script>
+<script type="module" th:src="@{/front/top.bundle.js}"></script>
+<div th:replace="~{fragments/top-extra :: body-bottom} ?: _"></div>
 </body>
 </html>

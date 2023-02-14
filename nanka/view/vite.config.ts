@@ -1,21 +1,37 @@
 import { defineConfig } from 'vite';
 import path from 'path';
+import glob from 'glob';
+
+const isPreview = process.env.PREVIEW!!;
+const root = path.resolve(__dirname, 'src/' + (isPreview ? 'preview' : 'main'))
+const outDir = isPreview ? 'preview' : 'front';
 
 export default defineConfig({
+    root: root,
     resolve: {
         alias: {
             '~bootstrap': path.resolve(__dirname, 'node_modules/bootstrap'),
+            '@': path.resolve(root, 'front')
         }
     },
     build: {
-        outDir: 'src/main/resources/static',
+        outDir: `resources/static/${outDir}`,
         rollupOptions: {
-            input: path.resolve(__dirname, 'src', 'frontend', 'main.ts'),
-            output: {
-                sourcemap: true,
-                entryFileNames: '[name].js',
-                assetFileNames: '[name].[ext]'
+            input: {
+                ...Object.fromEntries(
+                    glob.sync(`${root}/front/**/index.ts`).map(file => [
+                        path.basename(path.dirname(file)), file
+                    ])),
+                ...Object.fromEntries(
+                    glob.sync(`${root}/front/styles/*.scss`).map(file => [
+                        path.basename(path.dirname(file)), file
+                    ]))
             },
+            output: {
+                entryFileNames: '[name].bundle.js',
+                assetFileNames: '[name].[ext]'
+            }
         },
+        sourcemap: true
     }
 });
