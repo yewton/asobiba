@@ -7,7 +7,7 @@ const root = path.resolve(__dirname, 'src/main')
 export default defineConfig({
     root: root,
     build: {
-        outDir: 'resources/js',
+        outDir: 'resources/static/js',
         rollupOptions: {
             input: Object.fromEntries(
                 glob.sync(`${root}/ts/**/index.ts`).map(file => [
