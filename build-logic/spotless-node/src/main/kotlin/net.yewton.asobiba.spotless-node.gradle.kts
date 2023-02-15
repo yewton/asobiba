@@ -7,7 +7,7 @@ plugins {
     id("com.diffplug.spotless")
 }
 
-val npmExec = if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+val npmExec = if (System.getProperty("os.name").lowercase().contains("windows")) {
     "/npm.cmd"
 } else { "/bin/npm" }
 val npmExecPath = "${project.tasks.named<NpmSetupTask>("npmSetup").get().npmDir.get()}${npmExec}"
