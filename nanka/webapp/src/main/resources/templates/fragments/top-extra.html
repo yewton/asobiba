@@ -2,10 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="ja">
 <body>
 
-<div th:fragment="body-bottom" th:remove="tag">
+<th:block th:fragment="body-bottom">
     <script type="module" th:src="@{/js/auth.bundle.js}"></script>
-    Hi! Ho!
-</div>
+</th:block>
 
 </body>
 </html>
