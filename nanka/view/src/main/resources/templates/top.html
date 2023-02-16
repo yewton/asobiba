@@ -1,12 +1,9 @@
 <!--/* @thymesVar id="nanka" type="net.yewton.asobiba.nanka.web.Nanka" */-->
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<html xmlns:th="http://www.thymeleaf.org" lang="ja"
+th:replace="~{layout :: main (~{ :: title}, ~{ :: body/content()})}">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <th:block th:replace="~{fragments/head :: csrf} ?: _"></th:block>
-    <link rel="stylesheet" th:href="@{/front/main.css}"/>
-    <title>Hello, World!</title>
+    <title>トップページ</title>
 </head>
 <body>
 <div class="px-4 py-5 my-5 text-center">
@@ -34,7 +31,5 @@
         </div>
     </div>
 </div>
-<script type="module" th:src="@{/front/top.bundle.js}"></script>
-<div th:replace="~{fragments/top-extra :: body-bottom} ?: _"></div>
 </body>
 </html>

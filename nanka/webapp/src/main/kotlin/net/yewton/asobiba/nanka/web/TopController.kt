@@ -6,11 +6,11 @@ import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 
 @Controller
-class IndexController : Logging {
+class TopController : Logging {
 
     @GetMapping("/")
-    fun getIndex(model: Model): String {
+    fun get(model: Model): String {
         model.addAttribute("nanka", Nanka("ProductionHoge", "ProductionFuga"))
-        return "index"
+        return "top"
     }
 }

@@ -11,7 +11,9 @@ import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequest
 import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.HttpStatusEntryPoint
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher
 import java.util.function.Consumer
 
 @Configuration
@@ -27,7 +29,14 @@ class SecurityConfig(private val customClientRegistrationRepository: ClientRegis
                 authorize(anyRequest, authenticated)
             }
             exceptionHandling {
-                authenticationEntryPoint = HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)
+                defaultAuthenticationEntryPointFor(
+                    HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED),
+                    AntPathRequestMatcher("/user/")
+                )
+                defaultAuthenticationEntryPointFor(
+                    LoginUrlAuthenticationEntryPoint("/"),
+                    AntPathRequestMatcher("/**")
+                )
             }
             csrf {
                 csrfTokenRepository = HttpSessionCsrfTokenRepository()

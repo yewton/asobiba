@@ -1,0 +1,35 @@
+<!--/* https://macchinetta.github.io/server-guideline-thymeleaf/1.8.1.SP1.RELEASE/ja/ArchitectureInDetail/WebApplicationDetail/TemplateLayout.html */-->
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja" th:fragment="main (title, body)"
+      th:with="rootTemplateName=${#execInfo.processedTemplateName}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <th:block th:replace="~{fragments/head :: csrf} ?: _"></th:block>
+    <link rel="stylesheet" th:href="@{/front/main.css}"/>
+    <title th:replace="${title}"></title>
+</head>
+<body>
+<header class="d-flex justify-content-center py-3 text-bg-dark">
+    <ul class="nav nav-pills">
+        <li class="nav-item"><a th:href="@{/}" class="nav-link"
+                                th:classappend="${rootTemplateName eq 'top'} ? 'active'"
+                                th:aria-current="${rootTemplateName eq 'top'} ? 'page'">Home</a></li>
+        <li class="nav-item"><a th:href="@{/my}" class="nav-link"
+                                th:classappend="${rootTemplateName eq 'my'} ? 'active'"
+                                th:aria-current="${rootTemplateName eq 'my'} ? 'page'">MyPage</a></li>
+    </ul>
+</header>
+
+<div th:replace="${body}"></div>
+
+<div class="container">
+    <footer class="py-3 my-4">
+        <p class="text-center text-muted" th:text="|&copy; ${#dates.year(#dates.createNow())} Nanka|"></p>
+    </footer>
+</div>
+
+<script type="module" th:src="@{/front/{name}.bundle.js(name=${rootTemplateName})}"></script>
+<th:block th:replace="~{|fragments/${rootTemplateName}-extra| :: body-bottom} ?: _"></th:block>
+</body>
+</html>

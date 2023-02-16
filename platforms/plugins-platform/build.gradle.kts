@@ -6,6 +6,7 @@ group = "net.yewton.asobiba.platform"
 
 dependencies {
     constraints {
+        // TODO https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto.build.generate-git-info
         api(libs.kotlin.jvm.gradle.plugin)
         api(libs.spotless.plugin)
         api(libs.detekt.plugin)

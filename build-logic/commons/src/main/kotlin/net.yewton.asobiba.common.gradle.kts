@@ -26,3 +26,12 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
+
+// https://github.com/gradle/gradle/issues/1534#issuecomment-605868060
+val localPropertiesFile = projectDir.resolve("local.properties")
+if (localPropertiesFile.exists()) {
+    `java.util`.Properties().run {
+        load(localPropertiesFile.inputStream())
+        forEach { (k, v) -> if (k is String) extra[k] = v }
+    }
+}
