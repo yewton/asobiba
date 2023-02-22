@@ -9,6 +9,18 @@ services:
       POSTGRES_DB: asobiba
     ports:
       - '15432:5432'
+  db2:
+    image: mariadb:10.11.2
+    volumes:
+      - db2-data:/var/lib/mysql
+    environment:
+      MARIADB_USER: maria
+      MARIADB_PASSWORD: my_cool_secret
+      MARIADB_ROOT_PASSWORD: my-secret-pw
+      MARIADB_DATABASE: asobiba
+    ports:
+      - '13306:3306'
+
   redis:
     image: redis:7.0.8
     ports:
@@ -16,3 +28,4 @@ services:
 
 volumes:
   db-data:
+  db2-data:

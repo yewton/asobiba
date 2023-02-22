@@ -1,0 +1,31 @@
+mybatis:
+  type-aliases-package: net.yewton.asobiba.batista.model
+  configuration:
+    map-underscore-to-camel-case: true
+    default-fetch-size: 100
+    default-statement-timeout: 30
+hikari: &hikari
+  minimum-idle: 5
+  maximum-pool-size: 10
+app:
+  datasource:
+    first:
+      url: "jdbc:mariadb://127.0.0.1:13306/asobiba"
+      username: maria
+      password: my_cool_secret
+      configuration:
+        <<: *hikari
+        pool-name: mariadb
+    second:
+      url: "jdbc:postgresql://127.0.0.1:15432/asobiba"
+      username: postgres
+      password: mysecretpassword
+      configuration:
+        <<: *hikari
+        pool-name: postgres
+spring:
+  sql:
+    init:
+      mode: always
+  jmx:
+    enabled: true

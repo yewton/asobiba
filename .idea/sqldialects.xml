@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
-    <file url="file://$PROJECT_DIR$/database/scripts/20221226124858_first_migration.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/batista/base/src/main/resources/net/yewton/asobiba/batista/mapper/first/KanyaMapper.xml" dialect="MariaDB" />
+    <file url="file://$PROJECT_DIR$/database/db1/scripts/20221226124858_first_migration.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/database/db2/scripts/20230220002435_create_changelog.sql" dialect="MariaDB" />
     <file url="PROJECT" dialect="PostgreSQL" />
   </component>
 </project>
