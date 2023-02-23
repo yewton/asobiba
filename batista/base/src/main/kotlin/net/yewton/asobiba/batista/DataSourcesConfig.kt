@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.context.annotation.Primary
 import org.springframework.jmx.export.MBeanExporter
 
 // https://docs.spring.io/spring-boot/docs/3.0.2/reference/html/howto.html#howto.data-access.configure-two-datasources
@@ -20,13 +19,11 @@ class DataSourcesConfig(val mBeanExporter: ObjectProvider<MBeanExporter>) {
 
     @Bean
     @ConfigurationProperties("app.datasource.first")
-    @Primary
     @FirstDataSource
     fun firstDataSourceProperties() = DataSourceProperties()
 
     @Bean(FIRST_DATASOURCE_NAME)
     @ConfigurationProperties("app.datasource.first.configuration")
-    @Primary
     @FirstDataSource
     fun firstDataSource(@FirstDataSource firstDataSourceProperties: DataSourceProperties): HikariDataSource =
         firstDataSourceProperties.initializeDataSourceBuilder()

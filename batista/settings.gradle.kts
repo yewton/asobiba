@@ -19,3 +19,4 @@ includeBuild("../spring-boot-libs")
 rootProject.name = "batista" // the component name
 include("base")
 include("mds-ssf")
+include("mds-rds")

@@ -28,6 +28,7 @@ dependencies {
     runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.springframework.boot:spring-boot-starter-webflux")
     testImplementation("io.kotest:kotest-assertions-core")
     testImplementation("io.kotest:kotest-runner-junit5")
     testImplementation("io.kotest.extensions:kotest-extensions-spring")

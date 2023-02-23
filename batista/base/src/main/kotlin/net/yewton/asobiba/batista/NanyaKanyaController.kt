@@ -6,6 +6,7 @@ import net.yewton.asobiba.batista.model.Kanya
 import net.yewton.asobiba.batista.model.Nanya
 import org.springframework.http.HttpEntity
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -27,6 +28,12 @@ class NanyaKanyaController(val nanyaMapper: NanyaMapper, val kanyaMapper: KanyaM
     @GetMapping("nanya")
     fun findNanya(@RequestParam name: String) = nanyaMapper.findByName(name)
 
+    @DeleteMapping("nanya")
+    fun deleteNanya(): HttpEntity<Unit> {
+        nanyaMapper.truncate()
+        return ResponseEntity.accepted().build()
+    }
+
     @PostMapping("kanya")
     fun insertKanya(@RequestParam name: String): HttpEntity<Unit> {
         kanyaMapper.insert(Kanya.newInstance(name))
@@ -37,4 +44,10 @@ class NanyaKanyaController(val nanyaMapper: NanyaMapper, val kanyaMapper: KanyaM
 
     @GetMapping("kanya")
     fun findKanya(@RequestParam name: String) = kanyaMapper.findByName(name)
+
+    @DeleteMapping("kanya")
+    fun deleteKanya(): HttpEntity<Unit> {
+        kanyaMapper.truncate()
+        return ResponseEntity.accepted().build()
+    }
 }
