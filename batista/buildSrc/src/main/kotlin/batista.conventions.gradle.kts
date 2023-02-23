@@ -33,3 +33,13 @@ dependencies {
     testImplementation("io.kotest.extensions:kotest-extensions-spring")
     testImplementation("org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.1")
 }
+
+tasks.register<Test>("integrationTest") {
+    description = "Runs integration tests."
+    group = "verification"
+
+    testClassesDirs = integrationTest.output.classesDirs
+    classpath = integrationTest.runtimeClasspath
+
+    useJUnitPlatform()
+}
