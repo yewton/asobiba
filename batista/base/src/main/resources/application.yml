@@ -4,18 +4,16 @@ mybatis:
     map-underscore-to-camel-case: true
     default-fetch-size: 100
     default-statement-timeout: 30
-hikari: &hikari
-  minimum-idle: 5
-  maximum-pool-size: 10
 app:
   datasource:
     first:
       url: "jdbc:mariadb://127.0.0.1:13306/asobiba"
       username: maria
       password: my_cool_secret
-      configuration:
-        <<: *hikari
+      configuration: &hikari
         pool-name: mariadb
+        minimum-idle: 5
+        maximum-pool-size: 10
     second:
       url: "jdbc:postgresql://127.0.0.1:15432/asobiba"
       username: postgres
