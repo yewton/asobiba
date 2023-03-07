@@ -8,7 +8,7 @@ kotlin = "1.8.10"
 commons-text = "org.apache.commons:commons-text:1.9"
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 detekt-plugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
-jetbrains-annotations = "org.jetbrains:annotations:24.0.0"
+jetbrains-annotations = "org.jetbrains:annotations:24.0.1"
 junit-bom = "org.junit:junit-bom:5.9.2"
 kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
 kotest-extensions-spring = "io.kotest.extensions:kotest-extensions-spring:1.1.2"
@@ -17,10 +17,10 @@ kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin
 kotlin-jvm-gradle-plugin = { module = "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin", version.ref = "kotlin" }
 kotlin-spring-plugin = { module = "org.jetbrains.kotlin.plugin.spring:org.jetbrains.kotlin.plugin.spring.gradle.plugin", version.ref = "kotlin" }
 node-plugin = "com.github.node-gradle:gradle-node-plugin:3.5.1"
-spotless-plugin = "com.diffplug.spotless:spotless-plugin-gradle:6.15.0"
-spring-boot-plugin = "org.springframework.boot:org.springframework.boot.gradle.plugin:3.0.2"
+spotless-plugin = "com.diffplug.spotless:spotless-plugin-gradle:6.16.0"
+spring-boot-plugin = "org.springframework.boot:org.springframework.boot.gradle.plugin:3.0.4"
 spring-dependency-management-plugin = "io.spring.dependency-management:io.spring.dependency-management.gradle.plugin:1.1.0"
 
 [plugins]
 version-catalog-update = "nl.littlerobots.version-catalog-update:0.7.0"
-versions = "com.github.ben-manes.versions:0.45.0"
+versions = "com.github.ben-manes.versions:0.46.0"
