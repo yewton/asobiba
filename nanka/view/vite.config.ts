@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import path from 'path';
-import glob from 'glob';
+import { globSync } from 'glob';
 
 const isPreview = process.env.PREVIEW!!;
 const root = path.resolve(__dirname, 'src/' + (isPreview ? 'preview' : 'main'))
@@ -19,11 +19,11 @@ export default defineConfig({
         rollupOptions: {
             input: {
                 ...Object.fromEntries(
-                    glob.sync(`${root}/front/**/index.ts`).map(file => [
+                    globSync(`${root}/front/**/index.ts`).map(file => [
                         path.basename(path.dirname(file)), file
                     ])),
                 ...Object.fromEntries(
-                    glob.sync(`${root}/front/styles/*.scss`).map(file => [
+                    globSync(`${root}/front/styles/*.scss`).map(file => [
                         path.basename(path.dirname(file)), file
                     ]))
             },
