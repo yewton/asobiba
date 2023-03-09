@@ -28,6 +28,6 @@ val renovateDebug by tasks.registering(NpxTask::class) {
     environment.set(mapOf(
             "RENOVATE_TOKEN" to (findProperty("renovate.token") as? String ?: ""),
             "LOG_LEVEL" to (findProperty("renovate.loglevel") as? String ?: "DEBUG"),
-            "RENOVATE_CONFIG_FILE" to layout.projectDirectory.file(".github/renovate.json").toString()
+            "RENOVATE_CONFIG_FILE" to layout.projectDirectory.file("renovate.json").toString()
     ))
 }

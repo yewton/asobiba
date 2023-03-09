@@ -1,6 +1,28 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:base"
+  "extends": ["config:base"],
+  "ignoreDeps": ["org.apache.commons:commons-text"],
+  "regexManagers": [
+    {
+      "fileMatch": ["net\\.yewton\\.asobiba\\.node\\.gradle\\.kts$"],
+      "matchStrings": ["version\\.set\\(\"(?<currentValue>.+?)\"\\)"],
+      "depNameTemplate": "node",
+      "datasourceTemplate": "node",
+      "versioningTemplate": "node"
+    },
+    {
+      "fileMatch": ["net\\.yewton\\.asobiba\\.node\\.gradle\\.kts$"],
+      "matchStrings": ["npmVersion\\.set\\(\"(?<currentValue>.+?)\"\\)"],
+      "depNameTemplate": "npm",
+      "datasourceTemplate": "npm",
+      "versioningTemplate": "npm"
+    },
+    {
+      "fileMatch": ["^build\\.gradle\\.kts$"],
+      "matchStrings": ["renovate@(?<currentValue>.+?)"],
+      "depNameTemplate": "renovate",
+      "datasourceTemplate": "npm",
+      "versioningTemplate": "npm"
+    }
   ]
 }
