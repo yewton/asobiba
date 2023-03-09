@@ -19,7 +19,7 @@
     },
     {
       "fileMatch": ["^build\\.gradle\\.kts$"],
-      "matchStrings": ["renovate@(?<currentValue>.+?)"],
+      "matchStrings": ["\"renovate@(?<currentValue>.+?)\""],
       "depNameTemplate": "renovate",
       "datasourceTemplate": "npm",
       "versioningTemplate": "npm"
