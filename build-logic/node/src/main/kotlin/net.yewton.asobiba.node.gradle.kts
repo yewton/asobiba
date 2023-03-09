@@ -7,6 +7,7 @@ plugins {
 configure<NodeExtension> {
     download.set(true)
     version.set("18.12.0")
+    npmVersion.set("9.6.1")
 }
 
 tasks.npmInstall {
