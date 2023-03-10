@@ -23,7 +23,7 @@ listOf(("build" to "build"),
 
 // https://zenn.dev/cybozu_ept/articles/compare-renovate-dry-run
 val renovateDebug by tasks.registering(NpxTask::class) {
-    command.set("renovate@34.159.1")
+    command.set("renovate@34.159.2")
     args.set(listOf("--dry-run=lookup", "--schedule=", "--require-config=ignored", "yewton/asobiba"))
     environment.set(mapOf(
             "RENOVATE_TOKEN" to (findProperty("renovate.token") as? String ?: ""),
