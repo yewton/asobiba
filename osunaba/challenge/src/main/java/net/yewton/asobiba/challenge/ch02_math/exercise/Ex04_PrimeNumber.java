@@ -1,6 +1,7 @@
 package net.yewton.asobiba.challenge.ch02_math.exercise;
 
-import java.util.BitSet;import java.util.List;
+import java.util.BitSet;
+import java.util.List;
 import java.util.stream.IntStream;
 
 public class Ex04_PrimeNumber {
