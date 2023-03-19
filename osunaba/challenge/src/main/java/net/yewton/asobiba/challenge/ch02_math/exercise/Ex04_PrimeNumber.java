@@ -6,8 +6,6 @@ import java.util.stream.IntStream;
 
 public class Ex04_PrimeNumber {
 
-  record Cell(int n, boolean eliminated) {}
-
   public List<Integer> calcPrimesUpToSimple(final int n) {
     return IntStream.rangeClosed(2, n).filter(this::isPrime).boxed().toList();
   }
