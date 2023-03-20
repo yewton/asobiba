@@ -25,6 +25,10 @@ services:
     image: redis:7.0.9
     ports:
       - '16379:6379'
+  zipkin:
+    image: openzipkin/zipkin-slim
+    ports:
+      - 9411:9411
 
 volumes:
   db-data:
