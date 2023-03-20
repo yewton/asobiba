@@ -19,6 +19,8 @@ dependencies {
     implementation(platform("net.yewton.asobiba.platform:product-platform"))
     testImplementation(platform("net.yewton.asobiba.platform:test-platform"))
 
+    annotationProcessor(platform("net.yewton.asobiba.platform:annotation-processor-platform"))
+
     implementation("org.jetbrains:annotations")
     testImplementation("org.junit.jupiter:junit-jupiter")
 }

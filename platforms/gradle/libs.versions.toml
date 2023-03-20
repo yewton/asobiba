@@ -2,6 +2,8 @@
 detekt = "1.22.0"
 kotest = "5.5.5"
 kotlin = "1.8.10"
+spring-doc = "2.0.4"
+therapi-runtime-javadoc = "0.15.0"
 
 [libraries]
 # @pin 敢えてこのバージョンにするというのが意図っぽいので( see https://github.com/gradle/gradle/blob/v7.6.0/subprojects/build-init/src/main/java/org/gradle/buildinit/plugins/internal/JvmProjectInitDescriptor.java#L214 )
@@ -20,6 +22,10 @@ node-plugin = "com.github.node-gradle:gradle-node-plugin:3.5.1"
 spotless-plugin = "com.diffplug.spotless:spotless-plugin-gradle:6.16.0"
 spring-boot-plugin = "org.springframework.boot:org.springframework.boot.gradle.plugin:3.0.4"
 spring-dependency-management-plugin = "io.spring.dependency-management:io.spring.dependency-management.gradle.plugin:1.1.0"
+springdoc-openapi-starter-common = { module = "org.springdoc:springdoc-openapi-starter-common", version.ref = "spring-doc" }
+springdoc-openapi-starter-webflux-ui = { module = "org.springdoc:springdoc-openapi-starter-webflux-ui", version.ref = "spring-doc" }
+therapi-runtime-javadoc-core = { module = "com.github.therapi:therapi-runtime-javadoc", version.ref = "therapi-runtime-javadoc" }
+therapi-runtime-javadoc-scribe = { module = "com.github.therapi:therapi-runtime-javadoc-scribe", version.ref = "therapi-runtime-javadoc" }
 
 [plugins]
 version-catalog-update = "nl.littlerobots.version-catalog-update:0.7.0"

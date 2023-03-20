@@ -13,5 +13,8 @@ dependencies {
     constraints {
         api(libs.commons.text)
         api(libs.jetbrains.annotations)
+        api(libs.springdoc.openapi.starter.common)
+        api(libs.springdoc.openapi.starter.webflux.ui)
+        api(libs.therapi.runtime.javadoc.core)
     }
 }
