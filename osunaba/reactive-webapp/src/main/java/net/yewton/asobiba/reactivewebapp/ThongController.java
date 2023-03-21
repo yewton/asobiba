@@ -1,6 +1,8 @@
 package net.yewton.asobiba.reactivewebapp;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +24,7 @@ public class ThongController {
    */
   @GetMapping("/{id}")
   public Thong get(@PathVariable String id) {
-    return new Thong(id, "ダミー");
+    return new Thong(id, "ダミー", "Java インタフェース", "Kotlinインタフェース");
   }
 
   /**
@@ -31,5 +33,16 @@ public class ThongController {
    * @param id 何かしらの識別子
    * @param name 何かしらの名称
    */
-  record Thong(String id, String name) {}
+  record Thong(
+      @NonNull String id,
+      @NonNull String name,
+      @Override String sharedFieldJava,
+      String sharedFieldKotlin)
+      implements JavaInterface, KotlinInterface {
+    @NotNull
+    @Override
+    public String getSharedFieldKotlin() {
+      return sharedFieldKotlin;
+    }
+  }
 }
