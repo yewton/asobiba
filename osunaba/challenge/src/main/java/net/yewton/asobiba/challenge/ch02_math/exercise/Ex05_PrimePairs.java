@@ -15,17 +15,10 @@ public class Ex05_PrimePairs {
   }
 
   public List<Pair> calcPairs(int maxValue, int distance) {
-    List<Integer> primes = prime.calcPrimesUpTo(maxValue);
+    List<Integer> primes = prime.calcPrimesUpTo(maxValue + distance);
     Set<Integer> primesSet = new HashSet<>(primes);
     return primes.stream()
-        .filter(
-            n -> {
-              if (n + distance <= maxValue) {
-                return primesSet.contains(n + distance);
-              } else {
-                return prime.isPrime(n + distance);
-              }
-            })
+        .filter(n -> primesSet.contains(n + distance))
         .map(n -> Pair.of(n, n + distance))
         .toList();
   }
