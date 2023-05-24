@@ -19,7 +19,7 @@ kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin
 kotlin-jvm-gradle-plugin = { module = "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin", version.ref = "kotlin" }
 kotlin-spring-plugin = { module = "org.jetbrains.kotlin.plugin.spring:org.jetbrains.kotlin.plugin.spring.gradle.plugin", version.ref = "kotlin" }
 node-plugin = "com.github.node-gradle:gradle-node-plugin:3.5.1"
-spotless-plugin = "com.diffplug.spotless:spotless-plugin-gradle:6.16.0"
+spotless-plugin = "com.diffplug.spotless:spotless-plugin-gradle:6.19.0"
 spring-boot-plugin = "org.springframework.boot:org.springframework.boot.gradle.plugin:3.0.4"
 spring-dependency-management-plugin = "io.spring.dependency-management:io.spring.dependency-management.gradle.plugin:1.1.0"
 springdoc-openapi-starter-common = { module = "org.springdoc:springdoc-openapi-starter-common", version.ref = "spring-doc" }
