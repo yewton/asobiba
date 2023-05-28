@@ -32,7 +32,7 @@ dependencies {
     testImplementation("io.kotest:kotest-assertions-core")
     testImplementation("io.kotest:kotest-runner-junit5")
     testImplementation("io.kotest.extensions:kotest-extensions-spring")
-    testImplementation("org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.1")
+    testImplementation("org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.2")
 }
 
 tasks.register<Test>("integrationTest") {
