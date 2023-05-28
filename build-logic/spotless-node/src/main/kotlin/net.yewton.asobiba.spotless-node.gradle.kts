@@ -1,6 +1,7 @@
 import com.diffplug.gradle.spotless.SpotlessTask
-import com.github.gradle.node.npm.task.NpmSetupTask
-import com.github.gradle.node.task.NodeSetupTask
+import com.github.gradle.node.NodeExtension
+import com.github.gradle.node.variant.VariantComputer
+import com.github.gradle.node.variant.computeNodeExec
 
 plugins {
     id("net.yewton.asobiba.node")
@@ -8,23 +9,25 @@ plugins {
     id("com.diffplug.spotless")
 }
 
-val nodeDir = project.tasks.named<NodeSetupTask>(NodeSetupTask.NAME).get().nodeDir.get()
-val npmDir = project.tasks.named<NpmSetupTask>(NpmSetupTask.NAME).get().npmDir.get()
-
-val isWin = System.getProperty("os.name").lowercase().contains("windows")
-
-val nodeExec = if (isWin) "node.exe" else "bin/node"
-val npmExec = if (isWin) "npm.cmd" else "bin/npm"
-
-val nodeExecPath = nodeDir.file(nodeExec)
-val npmExecPath = npmDir.file(npmExec)
+val (nodeExecPath, npmExecPath) = run {
+    // https://github.com/node-gradle/gradle-node-plugin/blob/5.0.0/src/main/kotlin/com/github/gradle/node/npm/exec/NpmExecRunner.kt#L78
+    val variantComputer = VariantComputer()
+    val nodeExtension = project.extensions.getByType<NodeExtension>()
+    val nodeDirProvider = nodeExtension.computedNodeDir
+    val npmDirProvider = variantComputer.computeNpmDir(nodeExtension, nodeDirProvider)
+    val nodeBinDirProvider = variantComputer.computeNodeBinDir(nodeDirProvider)
+    val npmBinDirProvider = variantComputer.computeNpmBinDir(npmDirProvider)
+    Pair(
+        computeNodeExec(nodeExtension, nodeBinDirProvider),
+        variantComputer.computeNpmExec(nodeExtension, npmBinDirProvider))
+}
 
 spotless {
     typescript {
         target("src/*/ts/**/*.ts", "src/*/front/**/*.ts")
         eslint()
-            .nodeExecutable(nodeExecPath)
-            .npmExecutable(npmExecPath)
+            .nodeExecutable(nodeExecPath.get())
+            .npmExecutable(npmExecPath.get())
             .configFile(".eslintrc.cjs")
             .tsconfigFile("tsconfig.json")
     }
@@ -32,8 +35,8 @@ spotless {
     format("scss") {
         target("src/*/styles/**/*.scss")
         prettier()
-            .nodeExecutable(nodeExecPath)
-            .npmExecutable(npmExecPath)
+            .nodeExecutable(nodeExecPath.get())
+            .npmExecutable(npmExecPath.get())
     }
 }
 
