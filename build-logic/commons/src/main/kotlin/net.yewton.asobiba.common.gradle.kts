@@ -1,5 +1,5 @@
 plugins {
-    id("java")
+    java
     id("net.yewton.asobiba.spotless")
 }
 
