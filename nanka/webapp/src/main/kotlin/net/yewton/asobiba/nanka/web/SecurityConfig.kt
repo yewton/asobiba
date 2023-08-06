@@ -3,15 +3,26 @@ package net.yewton.asobiba.nanka.web
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpStatus
+import org.springframework.security.authorization.AuthenticatedAuthorizationManager
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.invoke
+import org.springframework.security.core.userdetails.User
+import org.springframework.security.core.userdetails.UserDetails
+import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository
+import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserService
 import org.springframework.security.oauth2.client.web.DefaultOAuth2AuthorizationRequestResolver
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestResolver
 import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest
+import org.springframework.security.oauth2.core.user.OAuth2User
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.HttpStatusEntryPoint
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint
+import org.springframework.security.web.authentication.RememberMeServices
+import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices
+import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices.RememberMeTokenAlgorithm
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher
 import java.util.function.Consumer
@@ -22,10 +33,11 @@ class SecurityConfig(private val customClientRegistrationRepository: ClientRegis
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http {
-            authorizeRequests {
+            authorizeHttpRequests {
                 listOf("/", "/error", "/assets/**", "/front/**", "/js/**").forEach {
                     authorize(it, permitAll)
                 }
+                authorize("/my/sensitive", AuthenticatedAuthorizationManager.fullyAuthenticated())
                 authorize(anyRequest, authenticated)
             }
             exceptionHandling {
@@ -34,7 +46,7 @@ class SecurityConfig(private val customClientRegistrationRepository: ClientRegis
                     AntPathRequestMatcher("/user/")
                 )
                 defaultAuthenticationEntryPointFor(
-                    LoginUrlAuthenticationEntryPoint("/"),
+                    LoginUrlAuthenticationEntryPoint("/oauth2/authorization/github"),
                     AntPathRequestMatcher("/**")
                 )
             }
@@ -50,6 +62,14 @@ class SecurityConfig(private val customClientRegistrationRepository: ClientRegis
                 authorizationEndpoint {
                     authorizationRequestResolver = authorizationRequestResolver(customClientRegistrationRepository)
                 }
+                userInfoEndpoint {
+                    userService = oauth2UserService()
+                }
+            }
+            rememberMe {
+                alwaysRemember = true
+                useSecureCookie = true
+                rememberMeServices = rememberMeServices()
             }
         }
         return http.build()
@@ -77,4 +97,41 @@ class SecurityConfig(private val customClientRegistrationRepository: ClientRegis
                 params["prompt"] = "consent"
             }
         }
+
+    @Bean
+    fun rememberMeServices(): RememberMeServices {
+        val userDetailsService = UserDetailsService { MyRememberMeUser(User.withUsername(it).password(it).build()) }
+        val encodingAlgorithm = RememberMeTokenAlgorithm.SHA256
+        val rememberMe = TokenBasedRememberMeServices("test", userDetailsService, encodingAlgorithm)
+        rememberMe.setMatchingAlgorithm(RememberMeTokenAlgorithm.MD5)
+        rememberMe.setAlwaysRemember(true)
+        return rememberMe
+    }
+
+    @Bean
+    fun oauth2UserService(): OAuth2UserService<OAuth2UserRequest, OAuth2User> {
+        val delegate = DefaultOAuth2UserService()
+        return OAuth2UserService { userRequest ->
+            MyOauth2User(delegate.loadUser(userRequest))
+        }
+    }
+}
+
+interface MyUser {
+    fun getUsername(): String
+}
+
+class MyRememberMeUser(private val delegate: UserDetails) : UserDetails by delegate, MyUser
+class MyOauth2User(private val delegate: OAuth2User) : OAuth2User by delegate, UserDetails, MyUser {
+    override fun getPassword() = ""
+
+    override fun getUsername() = delegate.getAttribute<String>("email")?.substringBefore("@") ?: "Unknown"
+
+    override fun isAccountNonExpired() = true
+
+    override fun isAccountNonLocked() = true
+
+    override fun isCredentialsNonExpired() = true
+
+    override fun isEnabled() = true
 }

@@ -11,4 +11,8 @@ class MyController {
     @GetMapping
     @Suppress("FunctionOnlyReturningConstant")
     fun get() = "my"
+
+    @GetMapping("/sensitive")
+    @Suppress("FunctionOnlyReturningConstant")
+    fun getSensitive() = "sensitive"
 }
