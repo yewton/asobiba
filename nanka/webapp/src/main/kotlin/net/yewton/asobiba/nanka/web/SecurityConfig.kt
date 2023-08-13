@@ -15,7 +15,6 @@ import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService
 import org.springframework.security.oauth2.client.web.DefaultOAuth2AuthorizationRequestResolver
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestResolver
-import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest
 import org.springframework.security.oauth2.core.user.OAuth2User
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.HttpStatusEntryPoint
@@ -25,7 +24,6 @@ import org.springframework.security.web.authentication.rememberme.TokenBasedReme
 import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices.RememberMeTokenAlgorithm
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher
-import java.util.function.Consumer
 
 @Configuration
 class SecurityConfig(private val customClientRegistrationRepository: ClientRegistrationRepository) {
@@ -79,24 +77,13 @@ class SecurityConfig(private val customClientRegistrationRepository: ClientRegis
         clientRegistrationRepository: ClientRegistrationRepository?
     ): OAuth2AuthorizationRequestResolver {
         // https://github.com/spring-projects/spring-security/blob/6.0.1/config/src/main/java/org/springframework/security/config/http/OAuth2LoginBeanDefinitionParser.java#L78
-        val authorizationRequestResolver = DefaultOAuth2AuthorizationRequestResolver(
-            clientRegistrationRepository,
-            "/oauth2/authorization"
+        return MyAuthorizationRequestResolver(
+            DefaultOAuth2AuthorizationRequestResolver(
+                clientRegistrationRepository,
+                "/oauth2/authorization"
+            )
         )
-        authorizationRequestResolver.setAuthorizationRequestCustomizer(
-            authorizationRequestCustomizer()
-        )
-        return authorizationRequestResolver
     }
-
-    private fun authorizationRequestCustomizer(): Consumer<OAuth2AuthorizationRequest.Builder> =
-        Consumer {
-            it.additionalParameters {
-                    // https://stackoverflow.com/a/74243827/2142831
-                    params ->
-                params["prompt"] = "consent"
-            }
-        }
 
     @Bean
     fun rememberMeServices(): RememberMeServices {
