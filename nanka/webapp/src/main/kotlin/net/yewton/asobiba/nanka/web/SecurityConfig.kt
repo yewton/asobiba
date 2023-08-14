@@ -64,6 +64,9 @@ class SecurityConfig(private val customClientRegistrationRepository: ClientRegis
                 userInfoEndpoint {
                     userService = oauth2UserService()
                 }
+                redirectionEndpoint {
+                    baseUri = "/login/callback/*"
+                }
             }
             rememberMe {
                 alwaysRemember = true

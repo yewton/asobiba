@@ -16,3 +16,4 @@ spring:
           github:
             clientId: FIXME
             clientSecret: FIXME
+            redirectUri: "{baseUrl}/login/callback/{registrationId}"
