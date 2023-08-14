@@ -32,7 +32,7 @@ class SecurityConfig(private val customClientRegistrationRepository: ClientRegis
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http {
             authorizeHttpRequests {
-                listOf("/", "/error", "/assets/**", "/front/**", "/js/**").forEach {
+                listOf("/", "/login", "/error", "/assets/**", "/front/**", "/js/**").forEach {
                     authorize(it, permitAll)
                 }
                 authorize("/my/sensitive", AuthenticatedAuthorizationManager.fullyAuthenticated())
@@ -56,6 +56,7 @@ class SecurityConfig(private val customClientRegistrationRepository: ClientRegis
                 permitAll()
             }
             oauth2Login {
+                loginPage = "/login"
                 // https://docs.spring.io/spring-security/reference/6.0.1/servlet/oauth2/client/authorization-grants.html
                 authorizationEndpoint {
                     authorizationRequestResolver = authorizationRequestResolver(customClientRegistrationRepository)

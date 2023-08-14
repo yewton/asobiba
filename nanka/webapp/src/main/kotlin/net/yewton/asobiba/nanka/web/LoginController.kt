@@ -5,13 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 
 @Controller
-@RequestMapping("/my")
+@RequestMapping("/login")
 @Suppress("FunctionOnlyReturningConstant")
-class MyController {
-
+class LoginController {
     @GetMapping
-    fun get() = "my"
-
-    @GetMapping("/sensitive")
-    fun getSensitive() = "sensitive"
+    fun login() = "redirect:/oauth2/authorization/github"
 }
