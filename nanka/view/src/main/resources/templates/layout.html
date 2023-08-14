@@ -24,6 +24,10 @@
             <a th:href="@{/my/sensitive}" class="nav-link"
                th:classappend="${rootTemplateName eq name} ? 'active'"
                th:aria-current="${rootTemplateName eq name} ? 'page'">センシティブ</a></li>
+        <li class="nav-item" th:with="name='sensitive2'">
+            <a th:href="@{/my/sensitive2}" class="nav-link"
+               th:classappend="${rootTemplateName eq name} ? 'active'"
+               th:aria-current="${rootTemplateName eq name} ? 'page'">センシティブその2</a></li>
     </ul>
 </header>
 
