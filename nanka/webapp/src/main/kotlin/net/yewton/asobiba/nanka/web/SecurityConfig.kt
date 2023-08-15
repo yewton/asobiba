@@ -67,6 +67,7 @@ class SecurityConfig(private val customClientRegistrationRepository: ClientRegis
                 redirectionEndpoint {
                     baseUri = "/login/callback/*"
                 }
+                authenticationSuccessHandler = MyOAuth2AuthenticationSuccessHandler()
             }
             rememberMe {
                 alwaysRemember = true

@@ -10,23 +10,29 @@ class MyAuthorizationRequestResolver(
 ) : OAuth2AuthorizationRequestResolver {
 
     override fun resolve(request: HttpServletRequest): OAuth2AuthorizationRequest? {
-        return decorate(delegate.resolve(request))
+        return decorate(request) { delegate.resolve(it) }
     }
 
     override fun resolve(
         request: HttpServletRequest,
         clientRegistrationId: String
     ): OAuth2AuthorizationRequest? {
-        return decorate(delegate.resolve(request, clientRegistrationId))
+        return decorate(request) { delegate.resolve(it, clientRegistrationId) }
     }
 
-    private fun decorate(base: OAuth2AuthorizationRequest?): OAuth2AuthorizationRequest? {
-        return base?.let {
-            val builder = OAuth2AuthorizationRequest.from(it)
-            if (!MyAuthentication.current().isFullyAuthenticated()) {
-                builder.additionalParameters { params -> params["prompt"] = "consent" }
-            }
-            builder.build()
+    private fun decorate(
+        request: HttpServletRequest,
+        provider: (HttpServletRequest) -> OAuth2AuthorizationRequest?
+    ): OAuth2AuthorizationRequest? {
+        val base = provider.invoke(request) ?: return null
+        val reAuthRequirementChecker = ReAuthRequirementChecker(
+            MyAuthentication.current(),
+            LastLoggedInTimeHolder(request.session)
+        )
+        val builder = OAuth2AuthorizationRequest.from(base)
+        if (reAuthRequirementChecker.reAuthRequired()) {
+            builder.additionalParameters { params -> params["prompt"] = "consent" }
         }
+        return builder.build()
     }
 }

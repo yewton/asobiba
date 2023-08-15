@@ -1,5 +1,6 @@
 package net.yewton.asobiba.nanka.web
 
+import jakarta.servlet.http.HttpSession
 import org.springframework.security.authentication.InsufficientAuthenticationException
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
@@ -17,9 +18,13 @@ class MyController {
     fun getSensitive() = "sensitive"
 
     @GetMapping("/sensitive2")
-    fun getSensitive2(): String {
-        if (!MyAuthentication.current().isFullyAuthenticated()) {
-            throw InsufficientAuthenticationException("ちゃんとログインしてね！")
+    fun getSensitive2(session: HttpSession): String {
+        val fullyAuthenticatedChecker = ReAuthRequirementChecker(
+            MyAuthentication.current(),
+            LastLoggedInTimeHolder(session)
+        )
+        if (fullyAuthenticatedChecker.reAuthRequired()) {
+            throw InsufficientAuthenticationException("もう一度ログインしてね！")
         }
         return "sensitive2"
     }
