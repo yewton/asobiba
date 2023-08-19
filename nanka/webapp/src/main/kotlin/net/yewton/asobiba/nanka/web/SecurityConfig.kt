@@ -4,11 +4,11 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpStatus
 import org.springframework.security.authorization.AuthenticatedAuthorizationManager
+import org.springframework.security.config.annotation.ObjectPostProcessor
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
+import org.springframework.security.config.annotation.web.configurers.ExceptionHandlingConfigurer
 import org.springframework.security.config.annotation.web.invoke
-import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetails
-import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest
@@ -17,13 +17,15 @@ import org.springframework.security.oauth2.client.web.DefaultOAuth2Authorization
 import org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestResolver
 import org.springframework.security.oauth2.core.user.OAuth2User
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.security.web.access.ExceptionTranslationFilter
+import org.springframework.security.web.access.intercept.RequestAuthorizationContext
 import org.springframework.security.web.authentication.HttpStatusEntryPoint
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint
-import org.springframework.security.web.authentication.RememberMeServices
-import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices
-import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices.RememberMeTokenAlgorithm
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher
+
+// TODO 独自の認証を追加する
+// TODO RequestCache を使わないリダイレクト
 
 @Configuration
 class SecurityConfig(private val customClientRegistrationRepository: ClientRegistrationRepository) {
@@ -35,7 +37,12 @@ class SecurityConfig(private val customClientRegistrationRepository: ClientRegis
                 listOf("/", "/login", "/error", "/assets/**", "/front/**", "/js/**").forEach {
                     authorize(it, permitAll)
                 }
-                authorize("/my/sensitive", AuthenticatedAuthorizationManager.fullyAuthenticated())
+                authorize(
+                    "/my/sensitive",
+                    AuthenticatedAuthorizationManager.fullyAuthenticated<RequestAuthorizationContext>().apply {
+                        setTrustResolver(MyAuthenticationTrustResolver())
+                    }
+                )
                 authorize(anyRequest, authenticated)
             }
             exceptionHandling {
@@ -47,6 +54,14 @@ class SecurityConfig(private val customClientRegistrationRepository: ClientRegis
                     LoginUrlAuthenticationEntryPoint("/oauth2/authorization/github"),
                     AntPathRequestMatcher("/**")
                 )
+            }
+            apply(ExceptionHandlingConfigurer()) {
+                addObjectPostProcessor(object : ObjectPostProcessor<ExceptionTranslationFilter> {
+                    override fun <O : ExceptionTranslationFilter> postProcess(filter: O) =
+                        filter.apply {
+                            setAuthenticationTrustResolver(MyAuthenticationTrustResolver())
+                        }
+                })
             }
             csrf {
                 csrfTokenRepository = HttpSessionCsrfTokenRepository()
@@ -75,6 +90,7 @@ class SecurityConfig(private val customClientRegistrationRepository: ClientRegis
                 rememberMeServices = rememberMeServices()
             }
         }
+        http.authenticationProvider(MyUnsafeRememberMeAuthenticationProvider())
         return http.build()
     }
 
@@ -91,14 +107,7 @@ class SecurityConfig(private val customClientRegistrationRepository: ClientRegis
     }
 
     @Bean
-    fun rememberMeServices(): RememberMeServices {
-        val userDetailsService = UserDetailsService { MyRememberMeUser(User.withUsername(it).password(it).build()) }
-        val encodingAlgorithm = RememberMeTokenAlgorithm.SHA256
-        val rememberMe = TokenBasedRememberMeServices("test", userDetailsService, encodingAlgorithm)
-        rememberMe.setMatchingAlgorithm(RememberMeTokenAlgorithm.MD5)
-        rememberMe.setAlwaysRemember(true)
-        return rememberMe
-    }
+    fun rememberMeServices() = MyUnsafeRememberMeServices()
 
     @Bean
     fun oauth2UserService(): OAuth2UserService<OAuth2UserRequest, OAuth2User> {
