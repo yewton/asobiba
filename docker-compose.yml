@@ -10,7 +10,7 @@ services:
     ports:
       - '15432:5432'
   db2:
-    image: mariadb:10.11.5
+    image: mariadb:11.0.3
     volumes:
       - db2-data:/var/lib/mysql
     environment:
