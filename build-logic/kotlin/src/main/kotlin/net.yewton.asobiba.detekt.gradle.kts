@@ -1,3 +1,4 @@
+import io.gitlab.arturbosch.detekt.CONFIGURATION_DETEKT
 import io.gitlab.arturbosch.detekt.Detekt
 
 plugins {
@@ -23,4 +24,13 @@ tasks.withType<Detekt>().configureEach {
     buildUponDefaultConfig = true
     basePath = projectDir.absolutePath
     include("**/*.kt", "**/*.kts")
+}
+
+// https://github.com/detekt/detekt/issues/6198#issuecomment-1611248496
+project.afterEvaluate {
+    configurations[CONFIGURATION_DETEKT].resolutionStrategy.eachDependency {
+        if (requested.group == "org.jetbrains.kotlin") {
+            useVersion("1.9.0")
+        }
+    }
 }

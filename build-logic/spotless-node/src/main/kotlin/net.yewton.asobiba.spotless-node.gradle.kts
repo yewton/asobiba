@@ -10,13 +10,13 @@ plugins {
 }
 
 val (nodeExecPath, npmExecPath) = run {
-    // https://github.com/node-gradle/gradle-node-plugin/blob/5.0.0/src/main/kotlin/com/github/gradle/node/npm/exec/NpmExecRunner.kt#L78
+    // https://github.com/node-gradle/gradle-node-plugin/blob/7.0.0/src/main/kotlin/com/github/gradle/node/npm/exec/NpmExecRunner.kt#L70
     val variantComputer = VariantComputer()
     val nodeExtension = project.extensions.getByType<NodeExtension>()
-    val nodeDirProvider = nodeExtension.computedNodeDir
+    val nodeDirProvider = nodeExtension.resolvedNodeDir
     val npmDirProvider = variantComputer.computeNpmDir(nodeExtension, nodeDirProvider)
-    val nodeBinDirProvider = variantComputer.computeNodeBinDir(nodeDirProvider)
-    val npmBinDirProvider = variantComputer.computeNpmBinDir(npmDirProvider)
+    val nodeBinDirProvider = variantComputer.computeNodeBinDir(nodeDirProvider, nodeExtension.resolvedPlatform)
+    val npmBinDirProvider = variantComputer.computeNpmBinDir(npmDirProvider, nodeExtension.resolvedPlatform)
     Pair(
         computeNodeExec(nodeExtension, nodeBinDirProvider),
         variantComputer.computeNpmExec(nodeExtension, npmBinDirProvider))
