@@ -1,6 +1,7 @@
 import com.github.gradle.node.npm.task.NpxTask
 
 plugins {
+    id("net.yewton.asobiba.kotlin-common")
     id("net.yewton.asobiba.node")
 }
 
