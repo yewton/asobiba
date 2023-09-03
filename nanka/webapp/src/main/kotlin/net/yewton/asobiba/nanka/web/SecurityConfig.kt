@@ -1,5 +1,6 @@
 package net.yewton.asobiba.nanka.web
 
+import org.springframework.boot.web.servlet.FilterRegistrationBean
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpStatus
@@ -8,7 +9,6 @@ import org.springframework.security.config.annotation.ObjectPostProcessor
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configurers.ExceptionHandlingConfigurer
 import org.springframework.security.config.annotation.web.invoke
-import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest
@@ -19,16 +19,17 @@ import org.springframework.security.oauth2.core.user.OAuth2User
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.access.ExceptionTranslationFilter
 import org.springframework.security.web.access.intercept.RequestAuthorizationContext
+import org.springframework.security.web.authentication.AnonymousAuthenticationFilter
 import org.springframework.security.web.authentication.HttpStatusEntryPoint
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher
 
-// TODO 独自の認証を追加する
-// TODO RequestCache を使わないリダイレクト
-
 @Configuration
-class SecurityConfig(private val customClientRegistrationRepository: ClientRegistrationRepository) {
+class SecurityConfig(
+    private val customClientRegistrationRepository: ClientRegistrationRepository,
+    private val myUnsafeAuthenticationFilter: MyUnsafeAuthenticationFilter
+) {
 
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
@@ -89,6 +90,7 @@ class SecurityConfig(private val customClientRegistrationRepository: ClientRegis
                 useSecureCookie = true
                 rememberMeServices = rememberMeServices()
             }
+            addFilterBefore<AnonymousAuthenticationFilter>(myUnsafeAuthenticationFilter)
         }
         http.authenticationProvider(MyUnsafeRememberMeAuthenticationProvider())
         return http.build()
@@ -116,23 +118,11 @@ class SecurityConfig(private val customClientRegistrationRepository: ClientRegis
             MyOauth2User(delegate.loadUser(userRequest))
         }
     }
-}
 
-interface MyUser {
-    fun getUsername(): String
-}
-
-class MyRememberMeUser(private val delegate: UserDetails) : UserDetails by delegate, MyUser
-class MyOauth2User(private val delegate: OAuth2User) : OAuth2User by delegate, UserDetails, MyUser {
-    override fun getPassword() = ""
-
-    override fun getUsername() = delegate.getAttribute<String>("email")?.substringBefore("@") ?: "Unknown"
-
-    override fun isAccountNonExpired() = true
-
-    override fun isAccountNonLocked() = true
-
-    override fun isCredentialsNonExpired() = true
-
-    override fun isEnabled() = true
+    // https://docs.spring.io/spring-security/reference/servlet/architecture.html#adding-custom-filter
+    @Bean
+    fun tenantFilterRegistration(filter: MyUnsafeAuthenticationFilter) =
+        FilterRegistrationBean(filter).apply {
+            setEnabled(false)
+        }
 }
