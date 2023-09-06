@@ -1,6 +1,7 @@
 package net.yewton.asobiba.challenge.ch02_math.exercise;
 
 import java.util.List;
+import java.util.NavigableSet;
 import java.util.Objects;
 import java.util.TreeSet;
 import java.util.stream.IntStream;
@@ -18,7 +19,7 @@ public class Ex07_RomanNumbers {
     M(1000),
     NULL(0);
 
-    private static final TreeSet<Roman> SEQUENCE = new TreeSet<>(List.of(I, V, X, L, C, D, M));
+    private static final NavigableSet<Roman> SEQUENCE = new TreeSet<>(List.of(I, V, X, L, C, D, M));
 
     private final int value;
 
