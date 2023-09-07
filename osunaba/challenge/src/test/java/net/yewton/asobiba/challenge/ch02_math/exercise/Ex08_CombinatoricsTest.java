@@ -3,6 +3,7 @@ package net.yewton.asobiba.challenge.ch02_math.exercise;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.stream.Stream;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -18,5 +19,11 @@ public class Ex08_CombinatoricsTest {
   public static Stream<Arguments> abcSource() {
     var sut = new Ex08_Combinatorics();
     return sut.findABCs().stream().sorted().map(abc -> Arguments.of(abc.a(), abc.b(), abc.c()));
+  }
+
+  @Test
+  void findABC2() {
+    var sut = new Ex08_Combinatorics();
+    assertEquals(sut.findABCs(), sut.findABCs2());
   }
 }
