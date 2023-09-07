@@ -23,21 +23,22 @@ public class Ex08_Combinatorics {
     }
   }
 
-  /**
-   * a^2 + b^2 = c^2 を満たす a, b, c の組を見つける
-   * ( それぞれ 1 以上 100 未満の値まで )。
-   */
+  /** a^2 + b^2 = c^2 を満たす a, b, c の組を見つける ( それぞれ 1 以上 100 未満の値まで )。 */
   public Set<ABC> findABCs() {
     final Set<ABC> result = new HashSet<>();
-    IntStream.range(1, 100).forEach(a ->
-        IntStream.range(1, 100).forEach(b ->
-            IntStream.range(1, 100).forEach(c -> {
-              if (Math.pow(a, 2) + Math.pow(b, 2) == Math.pow(c, 2)) {
-                result.add(new ABC(a, b, c));
-              }
-            })
-        )
-    );
+    IntStream.range(1, 100)
+        .forEach(
+            a ->
+                IntStream.range(1, 100)
+                    .forEach(
+                        b ->
+                            IntStream.range(1, 100)
+                                .forEach(
+                                    c -> {
+                                      if (Math.pow(a, 2) + Math.pow(b, 2) == Math.pow(c, 2)) {
+                                        result.add(new ABC(a, b, c));
+                                      }
+                                    })));
     return Collections.unmodifiableSet(result);
   }
 }
