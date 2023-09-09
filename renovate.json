@@ -1,25 +1,44 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:best-practices"],
-  "ignoreDeps": ["org.apache.commons:commons-text"],
+  "extends": [
+    "config:best-practices"
+  ],
+  "ignoreDeps": [
+    "org.apache.commons:commons-text"
+  ],
   "regexManagers": [
     {
-      "fileMatch": ["net\\.yewton\\.asobiba\\.node\\.gradle\\.kts$"],
-      "matchStrings": ["version\\.set\\(\"(?<currentValue>.+?)\"\\)"],
+      "customType": "regex",
+      "fileMatch": [
+        "net\\.yewton\\.asobiba\\.node\\.gradle\\.kts$"
+      ],
+      "matchStrings": [
+        "version\\.set\\(\"(?<currentValue>.+?)\"\\)"
+      ],
       "depNameTemplate": "node",
       "datasourceTemplate": "node",
       "versioningTemplate": "node"
     },
     {
-      "fileMatch": ["net\\.yewton\\.asobiba\\.node\\.gradle\\.kts$"],
-      "matchStrings": ["npmVersion\\.set\\(\"(?<currentValue>.+?)\"\\)"],
+      "customType": "regex",
+      "fileMatch": [
+        "net\\.yewton\\.asobiba\\.node\\.gradle\\.kts$"
+      ],
+      "matchStrings": [
+        "npmVersion\\.set\\(\"(?<currentValue>.+?)\"\\)"
+      ],
       "depNameTemplate": "npm",
       "datasourceTemplate": "npm",
       "versioningTemplate": "npm"
     },
     {
-      "fileMatch": ["^build\\.gradle\\.kts$"],
-      "matchStrings": ["\"renovate@(?<currentValue>.+?)\""],
+      "customType": "regex",
+      "fileMatch": [
+        "^build\\.gradle\\.kts$"
+      ],
+      "matchStrings": [
+        "\"renovate@(?<currentValue>.+?)\""
+      ],
       "depNameTemplate": "renovate",
       "datasourceTemplate": "npm",
       "versioningTemplate": "npm"
@@ -28,7 +47,9 @@
   "packageRules": [
     {
       "description": "v prefix workaround for action updates",
-      "matchDepTypes": ["action"],
+      "matchDepTypes": [
+        "action"
+      ],
       "extractVersion": "^(?<version>v\\d+\\.\\d+\\.\\d+)$",
       "versioning": "regex:^v(?<major>\\d+)(\\.(?<minor>\\d+)\\.(?<patch>\\d+))?$"
     }
