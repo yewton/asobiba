@@ -4,6 +4,8 @@
  * This project uses @Incubating APIs which are subject to change.
  */
 
+group = "$group.example-app"
+
 plugins {
     id("net.yewton.asobiba.kotlin-library")
 }

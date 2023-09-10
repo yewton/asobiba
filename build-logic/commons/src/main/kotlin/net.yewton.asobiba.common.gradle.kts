@@ -1,6 +1,7 @@
 plugins {
     java
     id("net.yewton.asobiba.spotless")
+    id("jacoco")
 }
 
 group = "net.yewton.asobiba"
@@ -36,4 +37,9 @@ if (localPropertiesFile.exists()) {
         load(localPropertiesFile.inputStream())
         forEach { (k, v) -> if (k is String) extra[k] = v }
     }
+}
+
+// 個々のプロジェクトではテストレポートを出力しない ( aggregation プロジェクトで行う )
+tasks.jacocoTestReport.configure {
+    enabled = false
 }
