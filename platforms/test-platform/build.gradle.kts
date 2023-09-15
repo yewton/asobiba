@@ -13,5 +13,6 @@ dependencies {
         api(libs.kotest.assertions.core)
         api(libs.kotest.runner.junit5)
         api(libs.kotest.extensions.spring)
+        api(libs.archunit.junit5)
     }
 }
