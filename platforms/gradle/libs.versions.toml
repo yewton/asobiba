@@ -1,6 +1,6 @@
 [versions]
 detekt = "1.23.1"
-kotest = "5.6.2"
+kotest = "5.7.2"
 kotlin = "1.9.10"
 spring-doc = "2.2.0"
 therapi-runtime-javadoc = "0.15.0"
