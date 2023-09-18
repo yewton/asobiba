@@ -20,7 +20,8 @@ class MyArchitectureTest {
     @ArchTest
     fun `@Configuration のクラス名`(importedClasses: JavaClasses) =
         ArchRuleDefinition.classes().that().areAnnotatedWith(
-            Configuration::class.java)
+            Configuration::class.java
+        )
             .should().haveSimpleNameEndingWith("Config")
             .run { check(importedClasses) }
 }
