@@ -1,0 +1,19 @@
+  version: '3'
+
+  tasks:
+    dump-db1:
+      cmds:
+        - docker compose exec db pg_dump -U postgres --no-owner --no-privileges --schema-only asobiba > database/db1_schema.sql
+      env:
+        PGPASSWORD: mysecretpassword
+      sources:
+        - database/db1/scripts/*.sql
+      generates:
+        - database/db1_schema.sql
+    dump-db2:
+      cmds:
+        - docker compose exec db2 mariadb-dump asobiba -u root -pmy-secret-pw --opt --no-data > database/db2_schema.sql
+      sources:
+        - database/db2/scripts/*.sql
+      generates:
+        - database/db2_schema.sql
