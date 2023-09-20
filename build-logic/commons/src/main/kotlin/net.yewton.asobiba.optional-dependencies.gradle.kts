@@ -1,5 +1,3 @@
-import org.gradle.kotlin.dsl.creating
-
 // https://github.com/spring-projects/spring-boot/blob/v3.0.2/buildSrc/src/main/java/org/springframework/boot/build/optional/OptionalDependenciesPlugin.java
 
 val optional: Configuration by configurations.creating {
