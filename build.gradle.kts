@@ -10,6 +10,7 @@ val subProjects = gradle.includedBuilds.map { it.name }.filterNot { excludeProje
 
 listOf(("build" to "build"),
         ("verification" to "check"),
+        ("verification" to "containerTest"),
         ("build" to "clean"),
         ("other" to "detektAndCorrect"),
         ("other" to "spotlessApply")).forEach { (groupName, task) ->
