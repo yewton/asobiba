@@ -7,5 +7,5 @@ repositories {
 }
 
 dependencies {
-    implementation("net.yewton.asobiba:build-logic-commons")
+    implementation("net.yewton.asobiba.build-logic:commons")
 }
