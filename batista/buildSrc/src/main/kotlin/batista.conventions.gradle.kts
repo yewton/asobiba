@@ -1,4 +1,5 @@
 plugins {
+    id("net.yewton.asobiba.common")
     java
     `jvm-test-suite`
 }
@@ -9,7 +10,7 @@ val integrationTest: SourceSet by sourceSets.creating {
     runtimeClasspath += sourceSets.main.get().output
 }
 
-val integrationTestImplementation by configurations.getting {
+val integrationTestImplementation: Configuration by configurations.getting {
     extendsFrom(configurations.testImplementation.get())
 }
 configurations[integrationTest.runtimeOnlyConfigurationName].extendsFrom(configurations.testRuntimeOnly.get())
@@ -33,6 +34,10 @@ dependencies {
     testImplementation("io.kotest:kotest-runner-junit5")
     testImplementation("io.kotest.extensions:kotest-extensions-spring")
     testImplementation("org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.2")
+
+    containerTestImplementation("io.kotest.extensions:kotest-extensions-testcontainers")
+    containerTestImplementation("org.testcontainers:mariadb")
+    containerTestImplementation("org.testcontainers:postgresql")
 }
 
 tasks.register<Test>("integrationTest") {

@@ -2,7 +2,11 @@
 // This build is not necessarily needed. The component builds work independently.
 
 includeBuild("platforms")
-includeBuild("build-logic")
+includeBuild("build-logic") {
+    dependencySubstitution {
+        substitute(module("net.yewton.asobiba:build-logic-commons")).using(project(":commons"))
+    }
+}
 
 includeBuild("osunaba")
 includeBuild("example-app")

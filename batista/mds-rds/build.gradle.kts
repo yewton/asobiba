@@ -11,3 +11,8 @@ dependencies {
 tasks.compileJava {
     inputs.files(tasks.processResources)
 }
+
+tasks.processContainerTestResources {
+    from("$projectDir/../../database/db1_schema.sql")
+    from("$projectDir/../../database/db2_schema.sql")
+}

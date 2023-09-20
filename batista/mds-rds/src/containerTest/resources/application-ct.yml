@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+app:
+  datasource:
+    first:
+      url: "jdbc:tc:mariadb:11.1.2:///asobiba?TC_TMPFS=/testtmpfs:rw&TC_INITSCRIPT=db2_schema.sql"
+    second:
+      url: "jdbc:tc:postgresql:15.4:///asobiba?TC_TMPFS=/testtmpfs:rw&TC_INITSCRIPT=db1_schema.sql"
