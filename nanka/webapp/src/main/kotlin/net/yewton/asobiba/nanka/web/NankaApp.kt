@@ -11,7 +11,10 @@ import org.springframework.boot.runApplication
 import org.springframework.core.env.ConfigurableEnvironment
 
 @SpringBootApplication
-class App(val environment: ConfigurableEnvironment, val buildProperties: BuildProperties) : ApplicationRunner, Logging {
+class NankaApp(
+    val environment: ConfigurableEnvironment,
+    val buildProperties: BuildProperties
+) : ApplicationRunner, Logging {
 
     override fun run(args: ApplicationArguments?) {
         logger.info("{}", buildProperties.name)
@@ -26,5 +29,5 @@ class App(val environment: ConfigurableEnvironment, val buildProperties: BuildPr
 
 fun main(args: Array<String>) {
     @Suppress("SpreadOperator")
-    runApplication<App>(*args)
+    runApplication<NankaApp>(*args)
 }

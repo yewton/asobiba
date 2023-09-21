@@ -1,0 +1,12 @@
+  version: '3'
+
+  tasks:
+    btrace:
+      desc: |
+        PID と FILE を指定して btrace を実行します。 btrace 自体は sdkman などでインストールしてね。
+      cmds:
+        - 'btrace {{.PID}} {{.FILE}}'
+      interactive: true
+      ignore_error: true
+      requires:
+        vars: [PID, FILE]

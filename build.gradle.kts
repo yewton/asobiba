@@ -5,7 +5,7 @@ plugins {
     id("net.yewton.asobiba.node")
 }
 
-val excludeProjects = listOf("build-logic", "platforms")
+val excludeProjects = listOf("build-logic", "platforms", "btrace")
 val subProjects = gradle.includedBuilds.map { it.name }.filterNot { excludeProjects.contains(it) }
 
 listOf(("build" to "build"),
