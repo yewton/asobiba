@@ -16,11 +16,13 @@ tasks.register<Detekt>("detektAndCorrect") {
     autoCorrect = true
 }
 
+// プロジェクトルートでの実行時は rootDir に、配下プロジェクトでの実行時は rootDir.parent にある
+val detektConfigCandidates = listOf(rootDir, rootDir.parent).map { "${it}/config/detekt/detekt.yml"}
 tasks.withType<Detekt>().configureEach {
     setSource(files(
             project.sourceSets.map { it.kotlin.srcDirs },
             projectDir.listFiles { file -> file.name.matches(Regex(""".*\.kts?$""")) }))
-    config.setFrom(files("${rootDir.parent}/config/detekt/detekt.yml"))
+    config.setFrom(files(*detektConfigCandidates.toTypedArray()).filter { it.exists() })
     buildUponDefaultConfig = true
     basePath = projectDir.absolutePath
     include("**/*.kt", "**/*.kts")
