@@ -6,7 +6,7 @@
   "ignoreDeps": [
     "org.apache.commons:commons-text"
   ],
-  "regexManagers": [
+  "customManagers": [
     {
       "customType": "regex",
       "fileMatch": [
