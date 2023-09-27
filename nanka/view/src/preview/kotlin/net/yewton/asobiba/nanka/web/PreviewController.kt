@@ -1,16 +1,18 @@
 package net.yewton.asobiba.nanka.web
 
 import org.springframework.stereotype.Controller
-import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.servlet.ModelAndView
 
 @Controller
 class PreviewController {
 
     @GetMapping("/")
-    fun getIndex(model: Model): String {
-        model.addAttribute("nanka", Nanka("Hoge", "Fuga"))
-        return "top"
+    fun getIndex(): ModelAndView {
+        val mavBuilder = IndexModelAndViewBuilder().apply {
+            nanka = Nanka("Hoge", "Fuga")
+        }
+        return mavBuilder.build()
     }
 
     @GetMapping("/my")
