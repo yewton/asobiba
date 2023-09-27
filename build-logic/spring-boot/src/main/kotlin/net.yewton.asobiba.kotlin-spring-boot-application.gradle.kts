@@ -14,7 +14,7 @@ springBoot {
         properties {
             additional.set(mapOf(
                     "project.dir" to projectDir,
-                    "project.resources" to sourceSets.filterNot { it.name.contains("test") }
+                    "project.resources" to sourceSets.filterNot { it.name.lowercase().contains("test") }
                             .flatMap { it.resources.srcDirs.map { dir -> dir.path } }
                             .distinct()
                             .joinToString(",")
