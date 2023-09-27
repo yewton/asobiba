@@ -3,12 +3,9 @@ allprojects {
 }
 
 // https://discuss.gradle.org/t/gradle-clean-all-projects/10618/3
-val cleanAll by tasks.registering {
+tasks.register("cleanAll") {
     group = "build"
-}
-
-subprojects {
-    cleanAll {
-        dependsOn(tasks.matching { it.name == "clean" })
+    subprojects.forEach { project ->
+        dependsOn(project.tasks.matching { it.name == "clean" })
     }
 }
