@@ -24,7 +24,7 @@ spring-dependency-management-plugin = "io.spring.dependency-management:io.spring
 springdoc-openapi-starter-common = { module = "org.springdoc:springdoc-openapi-starter-common", version.ref = "spring-doc" }
 springdoc-openapi-starter-webflux-ui = { module = "org.springdoc:springdoc-openapi-starter-webflux-ui", version.ref = "spring-doc" }
 # @pin https://github.com/kotest/kotest-extensions-testcontainers/blob/master/gradle/libs.versions.toml
-testcontainers-bom = "org.testcontainers:testcontainers-bom:1.18.3"
+testcontainers-bom = "org.testcontainers:testcontainers-bom:1.19.1"
 therapi-runtime-javadoc-core = { module = "com.github.therapi:therapi-runtime-javadoc", version.ref = "therapi-runtime-javadoc" }
 therapi-runtime-javadoc-scribe = { module = "com.github.therapi:therapi-runtime-javadoc-scribe", version.ref = "therapi-runtime-javadoc" }
 
