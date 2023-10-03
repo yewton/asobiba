@@ -1,8 +1,9 @@
-package net.yewton.asobiba.nanka.web
+package net.yewton.asobiba.nanka.web.unsafe
 
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
+import net.yewton.asobiba.nanka.web.MyUnsafeAuthUser
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.context.ApplicationEventPublisherAware
 import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent

@@ -1,8 +1,10 @@
-package net.yewton.asobiba.nanka.web
+package net.yewton.asobiba.nanka.web.unsafe.rememberme
 
 import jakarta.servlet.http.Cookie
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
+import net.yewton.asobiba.nanka.web.MyRememberMeUser
+import net.yewton.asobiba.nanka.web.MyUser
 import org.springframework.security.authentication.AuthenticationDetailsSource
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.authority.AuthorityUtils

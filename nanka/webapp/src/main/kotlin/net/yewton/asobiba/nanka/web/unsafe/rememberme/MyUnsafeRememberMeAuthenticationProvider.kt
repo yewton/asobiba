@@ -1,4 +1,4 @@
-package net.yewton.asobiba.nanka.web
+package net.yewton.asobiba.nanka.web.unsafe.rememberme
 
 import org.springframework.security.authentication.AuthenticationProvider
 import org.springframework.security.core.Authentication

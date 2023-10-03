@@ -1,5 +1,8 @@
 package net.yewton.asobiba.nanka.web
 
+import net.yewton.asobiba.nanka.web.unsafe.MyUnsafeAuthenticationFilter
+import net.yewton.asobiba.nanka.web.unsafe.rememberme.MyUnsafeRememberMeAuthenticationProvider
+import net.yewton.asobiba.nanka.web.unsafe.rememberme.MyUnsafeRememberMeServices
 import org.springframework.boot.web.servlet.FilterRegistrationBean
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

@@ -1,9 +1,9 @@
-package net.yewton.asobiba.nanka.web
+package net.yewton.asobiba.nanka.web.unsafe.rememberme
 
 import org.springframework.security.authentication.AbstractAuthenticationToken
 import org.springframework.security.core.GrantedAuthority
 
-class MyUnsafeAuthenticationToken(
+class MyUnsafeRememberMeAuthenticationToken(
     private val principal: Any,
     authorities: Collection<GrantedAuthority?>
 ) :

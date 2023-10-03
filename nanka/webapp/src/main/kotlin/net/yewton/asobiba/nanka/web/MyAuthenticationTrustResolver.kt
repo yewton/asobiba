@@ -1,5 +1,6 @@
 package net.yewton.asobiba.nanka.web
 
+import net.yewton.asobiba.nanka.web.unsafe.rememberme.MyUnsafeRememberMeAuthenticationToken
 import org.springframework.security.authentication.AuthenticationTrustResolver
 import org.springframework.security.authentication.AuthenticationTrustResolverImpl
 import org.springframework.security.core.Authentication
