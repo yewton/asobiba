@@ -3,6 +3,8 @@ package net.yewton.asobiba.nanka.web
 import net.yewton.asobiba.nanka.web.unsafe.MyUnsafeAuthenticationFilter
 import net.yewton.asobiba.nanka.web.unsafe.rememberme.MyUnsafeRememberMeAuthenticationProvider
 import net.yewton.asobiba.nanka.web.unsafe.rememberme.MyUnsafeRememberMeServices
+import net.yewton.asobiba.nanka.web.unsafe2.MyUnsafe2AuthenticationProcessingFilterConfigurer
+import net.yewton.asobiba.nanka.web.unsafe2.MyUnsafe2AuthenticationProvider
 import org.springframework.boot.web.servlet.FilterRegistrationBean
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -38,7 +40,7 @@ class SecurityConfig(
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http {
             authorizeHttpRequests {
-                listOf("/", "/login", "/error", "/assets/**", "/front/**", "/js/**").forEach {
+                listOf("/", "/login", "/login2", "/error", "/assets/**", "/front/**", "/js/**").forEach {
                     authorize(it, permitAll)
                 }
                 authorize(
@@ -49,7 +51,7 @@ class SecurityConfig(
                 )
                 authorize(anyRequest, authenticated)
             }
-            exceptionHandling {
+            apply(ExceptionHandlingConfigurer()) {
                 defaultAuthenticationEntryPointFor(
                     HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED),
                     AntPathRequestMatcher("/user/")
@@ -58,8 +60,6 @@ class SecurityConfig(
                     LoginUrlAuthenticationEntryPoint("/oauth2/authorization/github"),
                     AntPathRequestMatcher("/**")
                 )
-            }
-            apply(ExceptionHandlingConfigurer()) {
                 addObjectPostProcessor(object : ObjectPostProcessor<ExceptionTranslationFilter> {
                     override fun <O : ExceptionTranslationFilter> postProcess(filter: O) =
                         filter.apply {
@@ -94,8 +94,10 @@ class SecurityConfig(
                 rememberMeServices = rememberMeServices()
             }
             addFilterBefore<AnonymousAuthenticationFilter>(myUnsafeAuthenticationFilter)
+            apply(MyUnsafe2AuthenticationProcessingFilterConfigurer())
         }
         http.authenticationProvider(MyUnsafeRememberMeAuthenticationProvider())
+            .authenticationProvider(MyUnsafe2AuthenticationProvider())
         return http.build()
     }
 
@@ -124,7 +126,7 @@ class SecurityConfig(
 
     // https://docs.spring.io/spring-security/reference/servlet/architecture.html#adding-custom-filter
     @Bean
-    fun tenantFilterRegistration(filter: MyUnsafeAuthenticationFilter) =
+    fun myFilterRegistration(filter: MyUnsafeAuthenticationFilter) =
         FilterRegistrationBean(filter).apply {
             setEnabled(false)
         }
