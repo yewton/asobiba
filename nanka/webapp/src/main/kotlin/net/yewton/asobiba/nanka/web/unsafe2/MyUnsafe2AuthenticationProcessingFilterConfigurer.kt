@@ -8,7 +8,8 @@ import org.springframework.security.web.authentication.AnonymousAuthenticationFi
 import org.springframework.security.web.authentication.RememberMeServices
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy
 
-class MyUnsafe2AuthenticationProcessingFilterConfigurer : AbstractHttpConfigurer<MyUnsafe2AuthenticationProcessingFilterConfigurer, HttpSecurity>() {
+class MyUnsafe2AuthenticationProcessingFilterConfigurer :
+    AbstractHttpConfigurer<MyUnsafe2AuthenticationProcessingFilterConfigurer, HttpSecurity>() {
     override fun configure(http: HttpSecurity) {
         // ↓を参考にしてみたものの、そもそもおいそれと AuthenticationProcessingFilter を拡張しない方がよさそう
         // https://github.com/spring-projects/spring-security/blob/6.1.4/config/src/main/java/org/springframework/security/config/annotation/web/configurers/AbstractAuthenticationFilterConfigurer.java#L269
