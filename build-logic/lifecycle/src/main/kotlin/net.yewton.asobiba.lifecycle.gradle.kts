@@ -1,30 +1,25 @@
 import org.gradle.configurationcache.extensions.capitalized
 
-listOf(("build" to "build"),
-        ("build" to "clean"),
-        ("verification" to "check"),
-        ("verification" to "containerTest")).forEach { (groupName, task) ->
-    tasks.register("${task}All") {
-        group = groupName
-        description = "${task.capitalized()} all of the '${project.name}' component"
-        dependsOn(provider {
-            subprojects.mapNotNull {
-                it.tasks.findByName(task)
+listOf(("build" to listOf("build", "clean")),
+    ("verification" to listOf("check", "containerTest"))).forEach { (groupName, taskNames) ->
+    taskNames.forEach { taskName ->
+        tasks.register("${taskName}All") {
+            group = groupName
+            description = "${taskName.capitalized()} all of the '${project.name}' component"
+            subprojects {
+                this@register.dependsOn(provider { tasks.matching { it.name == taskName } })
             }
-        })
+        }
     }
 }
 
-val autoCorrectAll by tasks.registering {
+tasks.register("autoCorrectAll") {
     group = "verification"
-}
-
-subprojects {
-    // タスクが未定義だった場合に findByName だと null になってエラーになる
-    val autoCorrectTasks = provider {
-        tasks.matching { listOf("spotlessApply", "detektAndCorrect").contains(it.name) }
-    }
-    autoCorrectAll {
-        dependsOn(autoCorrectTasks)
+    subprojects {
+        // タスクが未定義だった場合に findByName だと null になってエラーになる
+        val autoCorrectTasks = provider {
+            tasks.matching { listOf("spotlessApply", "detektAndCorrect").contains(it.name) }
+        }
+        this@register.dependsOn(autoCorrectTasks)
     }
 }
