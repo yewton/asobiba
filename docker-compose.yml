@@ -22,7 +22,7 @@ services:
       - '13306:3306'
 
   redis:
-    image: redis:7.2.1@sha256:f92a0be0ba8c085e6a5e2d2bea386365443485bcd67ced5ca8ddcdacdd4656d2
+    image: redis:7.2.1@sha256:55f70c57c74b25d00c38ff60726da1caee17202774af2de365c36628d9b3c7e1
     ports:
       - '16379:6379'
   zipkin:
