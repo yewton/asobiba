@@ -5,6 +5,7 @@ plugins {
 
 dependencies {
     implementation(project(":base"))
+    containerTestImplementation(project(":base-container-test"))
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 }
 

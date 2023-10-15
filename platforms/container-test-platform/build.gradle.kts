@@ -8,7 +8,4 @@ javaPlatform.allowDependencies()
 
 dependencies {
     api(platform(libs.testcontainers.bom))
-    constraints {
-        api(libs.kotest.extensions.testcontainers)
-    }
 }

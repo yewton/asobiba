@@ -18,5 +18,6 @@ includeBuild("../spring-boot-libs")
 // == Define the inner structure of this component ==
 rootProject.name = "batista" // the component name
 include("base")
+include("base-container-test")
 include("mds-ssf")
 include("mds-rds")

@@ -35,7 +35,6 @@ dependencies {
     testImplementation("io.kotest.extensions:kotest-extensions-spring")
     testImplementation("org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.2")
 
-    containerTestImplementation("io.kotest.extensions:kotest-extensions-testcontainers")
     containerTestImplementation("org.testcontainers:mariadb")
     containerTestImplementation("org.testcontainers:postgresql")
 }
@@ -48,4 +47,9 @@ tasks.register<Test>("integrationTest") {
     classpath = integrationTest.runtimeClasspath
 
     useJUnitPlatform()
+}
+
+tasks.processContainerTestResources {
+    from("$projectDir/../../database/db1_schema.sql")
+    from("$projectDir/../../database/db2_schema.sql")
 }
