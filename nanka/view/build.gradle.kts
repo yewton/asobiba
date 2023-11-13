@@ -54,7 +54,6 @@ val viteBuildPreview by tasks.registering(ViteTask::class) {
     args.set(listOf("build"))
 }
 
-@Suppress("UnstableApiUsage")
 tasks.named<ProcessResources>(preview.processResourcesTaskName).configure {
     dependsOn(tasks.viteBuild, viteBuildPreview)
 }
