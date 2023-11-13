@@ -33,7 +33,8 @@ tasks.withType<Detekt>().configureEach {
 project.afterEvaluate {
     configurations[CONFIGURATION_DETEKT].resolutionStrategy.eachDependency {
         if (requested.group == "org.jetbrains.kotlin") {
-            useVersion("1.9.0")
+            @Suppress("UnstableApiUsage")
+            useVersion(io.gitlab.arturbosch.detekt.getSupportedKotlinVersion())
         }
     }
 }
