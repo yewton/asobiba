@@ -8,10 +8,8 @@ plugins {
 
 group = "$group.nanka"
 
-configurations {
-    compileOnly {
-        extendsFrom(configurations.annotationProcessor.get())
-    }
+configurations.compileOnly {
+    extendsFrom(configurations.annotationProcessor.get())
 }
 
 val preview: SourceSet by sourceSets.creating {
