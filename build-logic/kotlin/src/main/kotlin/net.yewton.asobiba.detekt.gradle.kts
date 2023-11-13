@@ -3,6 +3,7 @@ import io.gitlab.arturbosch.detekt.Detekt
 
 plugins {
     id("io.gitlab.arturbosch.detekt")
+    id("net.yewton.asobiba.devonly")
     kotlin
 }
 
@@ -12,7 +13,7 @@ dependencies {
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting")
 }
 
-tasks.register<Detekt>("detektAndCorrect") {
+val detektAndCorrect by tasks.registering(Detekt::class) {
     autoCorrect = true
 }
 
@@ -35,4 +36,8 @@ project.afterEvaluate {
             useVersion("1.9.0")
         }
     }
+}
+
+tasks.named("devOnly") {
+    dependsOn(detektAndCorrect)
 }

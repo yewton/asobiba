@@ -2,6 +2,7 @@ plugins {
     java
     id("net.yewton.asobiba.spotless")
     id("net.yewton.asobiba.container-test")
+    id("net.yewton.asobiba.devonly")
     id("jacoco")
 }
 
