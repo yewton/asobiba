@@ -22,7 +22,7 @@ spring-boot-plugin = "org.springframework.boot:spring-boot-gradle-plugin:3.1.5"
 spring-dependency-management-plugin = "io.spring.dependency-management:io.spring.dependency-management.gradle.plugin:1.1.4"
 springdoc-openapi-starter-common = { module = "org.springdoc:springdoc-openapi-starter-common", version.ref = "spring-doc" }
 springdoc-openapi-starter-webflux-ui = { module = "org.springdoc:springdoc-openapi-starter-webflux-ui", version.ref = "spring-doc" }
-testcontainers-bom = "org.testcontainers:testcontainers-bom:1.19.1"
+testcontainers-bom = "org.testcontainers:testcontainers-bom:1.19.3"
 therapi-runtime-javadoc-core = { module = "com.github.therapi:therapi-runtime-javadoc", version.ref = "therapi-runtime-javadoc" }
 therapi-runtime-javadoc-scribe = { module = "com.github.therapi:therapi-runtime-javadoc-scribe", version.ref = "therapi-runtime-javadoc" }
 
