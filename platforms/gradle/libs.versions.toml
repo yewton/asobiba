@@ -5,7 +5,7 @@ spring-doc = "2.2.0"
 therapi-runtime-javadoc = "0.15.0"
 
 [libraries]
-archunit-junit5 = "com.tngtech.archunit:archunit-junit5:1.1.0"
+archunit-junit5 = "com.tngtech.archunit:archunit-junit5:1.2.1"
 # @pin 敢えてこのバージョンにするというのが意図っぽいので( see https://github.com/gradle/gradle/blob/v7.6.0/subprojects/build-init/src/main/java/org/gradle/buildinit/plugins/internal/JvmProjectInitDescriptor.java#L214 )
 commons-text = "org.apache.commons:commons-text:1.9"
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
