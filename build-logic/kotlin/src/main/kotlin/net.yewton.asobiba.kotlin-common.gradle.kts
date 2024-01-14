@@ -1,6 +1,7 @@
 plugins {
     id("net.yewton.asobiba.common")
     id("net.yewton.asobiba.detekt")
+    id("net.yewton.asobiba.devonly")
     id("java")
     kotlin("jvm")
 }
@@ -15,4 +16,8 @@ dependencies {
 
 kotlin {
     jvmToolchain(17)
+}
+
+tasks.devOnly {
+    dependsOn(tasks.named("detektAndCorrect"))
 }

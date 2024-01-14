@@ -2,6 +2,7 @@
 // This build is not necessarily needed. The component builds work independently.
 
 includeBuild("platforms")
+includeBuild("build-logic-lint")
 includeBuild("build-logic")
 
 includeBuild("osunaba")

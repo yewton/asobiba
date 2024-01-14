@@ -1,6 +1,5 @@
 plugins {
     id("com.diffplug.spotless")
-    id("net.yewton.asobiba.devonly")
 }
 
 spotless {
@@ -27,8 +26,4 @@ spotless {
         trimTrailingWhitespace()
         endWithNewline()
     }
-}
-
-tasks.named("devOnly") {
-    dependsOn(tasks.named("spotlessApply"))
 }

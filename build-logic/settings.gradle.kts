@@ -1,3 +1,10 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+    }
+    includeBuild("../build-logic-lint")
+}
+
 dependencyResolutionManagement {
     repositories {
         gradlePluginPortal()

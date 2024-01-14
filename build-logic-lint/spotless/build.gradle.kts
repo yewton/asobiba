@@ -1,12 +1,9 @@
 plugins {
+    // Support convention plugins written in Kotlin. Convention plugins are build scripts in 'src/main' that automatically become available as plugins in the main build.
     `kotlin-dsl`
-    id("net.yewton.asobiba.detekt")
 }
 
 dependencies {
     implementation(platform("net.yewton.asobiba.platform:plugins-platform"))
-
-    implementation(project(":node"))
-    implementation("com.github.node-gradle:gradle-node-plugin")
     implementation("com.diffplug.spotless:spotless-plugin-gradle")
 }

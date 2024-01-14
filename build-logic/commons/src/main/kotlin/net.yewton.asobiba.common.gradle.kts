@@ -46,3 +46,7 @@ if (localPropertiesFile.exists()) {
 tasks.jacocoTestReport.configure {
     enabled = false
 }
+
+tasks.named("devOnly") {
+    dependsOn(tasks.named("spotlessApply"))
+}

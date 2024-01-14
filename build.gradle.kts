@@ -1,11 +1,10 @@
 import com.github.gradle.node.npm.task.NpxTask
 
 plugins {
-    id("net.yewton.asobiba.kotlin-common")
     id("net.yewton.asobiba.node")
 }
 
-val excludeProjects = listOf("build-logic", "platforms", "btrace")
+val excludeProjects = listOf("build-logic", "build-logic-lint", "platforms", "btrace")
 val subProjects = gradle.includedBuilds.map { it.name }.filterNot { excludeProjects.contains(it) }
 
 listOf(
@@ -22,6 +21,11 @@ listOf(
             }
         }
     }
+}
+
+tasks.named("autoCorrectAll") {
+    // build-logic は autoCorrectAll のみ対応
+    dependsOn(gradle.includedBuild("build-logic").task(":autoCorrectAll"))
 }
 
 // https://zenn.dev/cybozu_ept/articles/compare-renovate-dry-run

@@ -3,13 +3,11 @@ import io.gitlab.arturbosch.detekt.Detekt
 
 plugins {
     id("io.gitlab.arturbosch.detekt")
-    id("net.yewton.asobiba.devonly")
-    kotlin
+    kotlin("jvm")
 }
 
 dependencies {
     detektPlugins(platform("net.yewton.asobiba.platform:detekt-plugins-platform"))
-
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting")
 }
 
@@ -21,7 +19,7 @@ val detektAndCorrect by tasks.registering(Detekt::class) {
 val detektConfigCandidates = listOf(rootDir, rootDir.parent).map { "${it}/config/detekt/detekt.yml"}
 tasks.withType<Detekt>().configureEach {
     setSource(files(
-            project.sourceSets.map { it.kotlin.srcDirs },
+            project.sourceSets.flatMap { it.kotlin.srcDirs }.filterNot { it.path.contains("/build/") },
             projectDir.listFiles { file -> file.name.matches(Regex(""".*\.kts?$""")) }))
     config.setFrom(files(*detektConfigCandidates.toTypedArray()).filter { it.exists() })
     buildUponDefaultConfig = true
@@ -37,8 +35,4 @@ project.afterEvaluate {
             useVersion(io.gitlab.arturbosch.detekt.getSupportedKotlinVersion())
         }
     }
-}
-
-tasks.named("devOnly") {
-    dependsOn(detektAndCorrect)
 }
