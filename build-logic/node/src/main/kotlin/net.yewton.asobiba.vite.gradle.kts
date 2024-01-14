@@ -1,5 +1,5 @@
-import net.yewton.asobiba.gradle.ViteTask
 import net.yewton.asobiba.gradle.VitePluginExtension
+import net.yewton.asobiba.gradle.ViteTask
 
 plugins {
     id("net.yewton.asobiba.node")

@@ -8,10 +8,11 @@ abstract class ViteTask : NpxTask() {
     init {
         command.set("vite")
         inputs.files(
-                "package.json",
-                "package-lock.json",
-                "tsconfig.json",
-                "vite.config.ts")
+            "package.json",
+            "package-lock.json",
+            "tsconfig.json",
+            "vite.config.ts"
+        )
         inputs.dir(project.fileTree("node_modules").exclude(".cache"))
         dependsOn(NpmInstallTask.NAME)
     }

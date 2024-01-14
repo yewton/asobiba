@@ -9,8 +9,8 @@ plugins.withType<JavaPlugin>().configureEach {
     val sourceSets = project.extensions.getByType<JavaPluginExtension>().sourceSets
     sourceSets.all {
         project.configurations.getByName(compileClasspathConfigurationName)
-                .extendsFrom(optional)
+            .extendsFrom(optional)
         project.configurations.getByName(runtimeClasspathConfigurationName)
-                .extendsFrom(optional)
+            .extendsFrom(optional)
     }
 }

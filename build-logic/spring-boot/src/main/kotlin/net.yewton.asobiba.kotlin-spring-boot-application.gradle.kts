@@ -12,13 +12,15 @@ springBoot {
         // https://docs.spring.io/spring-boot/docs/3.0.2/gradle-plugin/reference/htmlsingle/#integrating-with-actuator.build-info
         excludes.set(setOf("time"))
         properties {
-            additional.set(mapOf(
+            additional.set(
+                mapOf(
                     "project.dir" to projectDir,
                     "project.resources" to sourceSets.filterNot { it.name.lowercase().contains("test") }
-                            .flatMap { it.resources.srcDirs.map { dir -> dir.path } }
-                            .distinct()
-                            .joinToString(",")
-            ))
+                        .flatMap { it.resources.srcDirs.map { dir -> dir.path } }
+                        .distinct()
+                        .joinToString(",")
+                )
+            )
         }
     }
 }

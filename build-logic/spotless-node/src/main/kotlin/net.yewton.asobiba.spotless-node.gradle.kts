@@ -19,7 +19,8 @@ val (nodeExecPath, npmExecPath) = run {
     val npmBinDirProvider = variantComputer.computeNpmBinDir(npmDirProvider, nodeExtension.resolvedPlatform)
     Pair(
         computeNodeExec(nodeExtension, nodeBinDirProvider),
-        variantComputer.computeNpmExec(nodeExtension, npmBinDirProvider))
+        variantComputer.computeNpmExec(nodeExtension, npmBinDirProvider)
+    )
 }
 
 spotless {
@@ -41,7 +42,7 @@ spotless {
 }
 
 listOf("Typescript", "Scss").forEach {
-    project.tasks.named<SpotlessTask>("spotless${it}").configure {
+    project.tasks.named<SpotlessTask>("spotless$it").configure {
         dependsOn(tasks.nodeSetup, tasks.npmSetup)
     }
 }

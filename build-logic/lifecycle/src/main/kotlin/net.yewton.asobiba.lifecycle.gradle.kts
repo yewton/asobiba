@@ -1,7 +1,9 @@
 import org.gradle.configurationcache.extensions.capitalized
 
-listOf(("build" to listOf("build", "clean")),
-    ("verification" to listOf("check", "containerTest"))).forEach { (groupName, taskNames) ->
+listOf(
+    ("build" to listOf("build", "clean")),
+    ("verification" to listOf("check", "containerTest"))
+).forEach { (groupName, taskNames) ->
     taskNames.forEach { taskName ->
         tasks.register("${taskName}All") {
             group = groupName
