@@ -8,7 +8,7 @@ plugins {
 configure<NodeExtension> {
     download.set(true)
     version.set("20.9.0")
-    npmVersion.set("10.2.3")
+    npmVersion.set("10.3.0")
 }
 
 tasks.npmInstall {
