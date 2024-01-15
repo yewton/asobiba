@@ -1,5 +1,3 @@
-import gradle.kotlin.dsl.accessors._a1228baf562abec1fa7625bd496eb682.check
-
 plugins {
     id("java-base") // we only apply 'java-base' as this plugin is for projects without source code
     id("jacoco")
