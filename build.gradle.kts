@@ -2,6 +2,7 @@ import com.github.gradle.node.npm.task.NpxTask
 
 plugins {
     id("net.yewton.asobiba.node")
+    java
 }
 
 val excludeProjects = listOf("build-logic", "build-logic-lint", "platforms", "btrace")
@@ -39,4 +40,23 @@ val renovateDebug by tasks.registering(NpxTask::class) {
             "RENOVATE_CONFIG_FILE" to layout.projectDirectory.file("renovate.json").toString()
         )
     )
+}
+
+val npmUpgradeAll by tasks.registering {
+    listOf("view", "webapp").forEach {
+        dependsOn(gradle.includedBuild("nanka").task(":$it:npmUpgrade"))
+    }
+}
+
+val npmInstallAll by tasks.registering {
+    listOf("view", "webapp").forEach {
+        dependsOn(gradle.includedBuild("nanka").task(":$it:npmInstall"))
+    }
+}
+
+// IntelliJ IDEA プロジェクトのデフォルトがこれで決まる
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
 }
