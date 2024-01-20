@@ -60,18 +60,21 @@ public class Ex07_RomanNumbers {
         .mapToInt(
             r ->
                 switch (r.current) {
-                  case I -> switch (r.next) {
-                    case V, X -> -(r.current.value);
-                    default -> r.current.value;
-                  };
-                  case X -> switch (r.next) {
-                    case L, C, D -> -(r.current.value);
-                    default -> r.current.value;
-                  };
-                  case C -> switch (r.next) {
-                    case D, M -> -(r.current.value);
-                    default -> r.current.value;
-                  };
+                  case I ->
+                      switch (r.next) {
+                        case V, X -> -(r.current.value);
+                        default -> r.current.value;
+                      };
+                  case X ->
+                      switch (r.next) {
+                        case L, C, D -> -(r.current.value);
+                        default -> r.current.value;
+                      };
+                  case C ->
+                      switch (r.next) {
+                        case D, M -> -(r.current.value);
+                        default -> r.current.value;
+                      };
                   default -> r.current.value;
                 })
         .sum();
@@ -87,9 +90,8 @@ public class Ex07_RomanNumbers {
 
       final String s =
           switch (roman) {
-            case I, X, C, M -> repeater == 4
-                ? roman.name() + roman.next().name()
-                : roman.name().repeat(repeater);
+            case I, X, C, M ->
+                repeater == 4 ? roman.name() + roman.next().name() : roman.name().repeat(repeater);
             case V, L, D -> {
               if (repeater == 0) {
                 yield "";
