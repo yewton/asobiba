@@ -19,3 +19,4 @@ rootProject.name = "osunaba" // the component name
 include("mondai")
 include("challenge")
 include("reactive-webapp")
+include("jcp2")
