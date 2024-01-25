@@ -6,4 +6,6 @@ plugins {
 
 dependencies {
     testImplementation("org.assertj:assertj-core:3.25.1")
+    testImplementation("org.openjdk.jmh:jmh-core:1.37")
+    testAnnotationProcessor("org.openjdk.jmh:jmh-generator-annprocess:1.37")
 }
