@@ -1,11 +1,21 @@
 package net.yewton.asobiba.osunaba.jcp2;
 
+import static org.junit.jupiter.api.Named.named;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
+
 import java.text.MessageFormat;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Stream;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Mode;
@@ -362,5 +372,56 @@ public class Chapter1 implements WithAssertions {
               .build();
       new Runner(opt).run();
     }
+  }
+
+  public static class IsomorphicChecker {
+    public boolean perform(String s1, String s2) {
+      if (Objects.isNull(s1) || Objects.isNull(s2) || s1.length() != s2.length()) {
+        return false;
+      }
+      Map<Character, Character> map = new HashMap<>();
+      for (int i = 0; i < s1.length(); i++) {
+        char chs1 = s1.charAt(i);
+        char chs2 = s2.charAt(i);
+        if (map.containsKey(chs1)) {
+          if (map.get(chs1) != chs2) {
+            return false;
+          }
+        } else {
+          if (map.containsValue(chs2)) {
+            return false;
+          }
+          map.put(chs1, chs2);
+        }
+      }
+      return true;
+    }
+  }
+
+  @ParameterizedTest(name = "[{index}] ''{0}'' と ''{1}'' は {2}")
+  @DisplayName("文字列の同型判定")
+  @MethodSource
+  void p12(String s1, String s2, boolean expected) {
+    assertThat(new IsomorphicChecker().perform(s1, s2)).isEqualTo(expected);
+  }
+
+  static Stream<Arguments> p12() {
+    var truthy = named("同型である", true);
+    var falsy = named("同型でない", false);
+    return Stream.of(
+        arguments("abbcdd", "qwwerr", truthy),
+        arguments("aab", "que", falsy),
+        arguments(
+            """
+                   abbcdd
+                     baaaad
+                   ccddaa
+                   """,
+            """
+                   qwwerr
+                     wqqqqr
+                   eerrqq
+                   """,
+            truthy));
   }
 }
