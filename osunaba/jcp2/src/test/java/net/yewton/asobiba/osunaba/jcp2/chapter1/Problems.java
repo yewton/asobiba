@@ -1,4 +1,4 @@
-package net.yewton.asobiba.osunaba.jcp2;
+package net.yewton.asobiba.osunaba.jcp2.chapter1;
 
 import static org.junit.jupiter.api.Named.named;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
@@ -27,7 +27,7 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
 import org.openjdk.jmh.runner.options.TimeValue;
 
 @SuppressWarnings("NewClassNamingConvention")
-public class Chapter1 implements WithAssertions {
+public class Problems implements WithAssertions {
   @Test
   @DisplayName("複数行に渡る文字列をつくる")
   void p01() {
