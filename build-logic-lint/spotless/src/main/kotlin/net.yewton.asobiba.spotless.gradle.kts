@@ -21,7 +21,9 @@ spotless {
     java {
         importOrder()
         removeUnusedImports()
-        googleJavaFormat()
+        palantirJavaFormat("2.39.0").style("GOOGLE").formatJavadoc(true)
+        formatAnnotations()
+        indentWithSpaces(2)
         targetExclude("build/generated/**/*.java")
         trimTrailingWhitespace()
         endWithNewline()

@@ -31,15 +31,14 @@ public class Problems implements WithAssertions {
   @Test
   @DisplayName("複数行に渡る文字列をつくる")
   void p01() {
-    var joinStyle =
-        String.join(
-            "\n",
-            "UPDATE \"public\".\"office\"",
-            "SET (\"address_first\", \"address_second\", \"phone\") =",
-            "  (SELECT \"public\".\"employee\".\"first_name\",",
-            "          \"public\".\"employee\".\"last_name\", ?",
-            "   FROM \"public\".\"employee\"",
-            "   WHERE \"public\".\"employee\".\"job_title\" = ?;");
+    var joinStyle = String.join(
+        "\n",
+        "UPDATE \"public\".\"office\"",
+        "SET (\"address_first\", \"address_second\", \"phone\") =",
+        "  (SELECT \"public\".\"employee\".\"first_name\",",
+        "          \"public\".\"employee\".\"last_name\", ?",
+        "   FROM \"public\".\"employee\"",
+        "   WHERE \"public\".\"employee\".\"job_title\" = ?;");
     var textBlockStyle =
         """
            UPDATE "public"."office"
@@ -164,9 +163,8 @@ public class Problems implements WithAssertions {
              FROM "public"."employee" \
              WHERE "public"."employee"."job_title" = ?\
              """;
-      var expected =
-          "SELECT \"public\".\"employee\".\"first_name\" FROM "
-              + "\"public\".\"employee\" WHERE \"public\".\"employee\".\"job_title\" = ?";
+      var expected = "SELECT \"public\".\"employee\".\"first_name\" FROM "
+          + "\"public\".\"employee\" WHERE \"public\".\"employee\".\"job_title\" = ?";
       assertThat(actual).isEqualTo(expected);
     }
 
@@ -184,13 +182,12 @@ public class Problems implements WithAssertions {
   """
               .trim()
               .replaceAll(" +", " ");
-      var expected =
-          "UPDATE \"public\".\"office\""
-              + " SET (\"address_first\", \"address_second\", \"phone\") ="
-              + " (SELECT \"public\".\"employee\".\"first_name\","
-              + " \"public\".\"employee\".\"last_name\", ?"
-              + " FROM \"public\".\"employee\""
-              + " WHERE \"public\".\"employee\".\"job_title\" = ?";
+      var expected = "UPDATE \"public\".\"office\""
+          + " SET (\"address_first\", \"address_second\", \"phone\") ="
+          + " (SELECT \"public\".\"employee\".\"first_name\","
+          + " \"public\".\"employee\".\"last_name\", ?"
+          + " FROM \"public\".\"employee\""
+          + " WHERE \"public\".\"employee\".\"job_title\" = ?";
       assertThat(actual).isEqualTo(expected);
     }
 
@@ -203,12 +200,11 @@ public class Problems implements WithAssertions {
               A frog jumps into the pond,
                 splash!! Silence again.\s\s
               """;
-      var expected =
-          String.join(
-              "\n",
-              "   An old silent pond...   ",
-              "A frog jumps into the pond,",
-              "  splash!! Silence again.  \n");
+      var expected = String.join(
+          "\n",
+          "   An old silent pond...   ",
+          "A frog jumps into the pond,",
+          "  splash!! Silence again.  \n");
       assertThat(actual).isEqualTo(expected);
     }
 
@@ -221,12 +217,11 @@ public class Problems implements WithAssertions {
               A frog jumps into the pond,
                 splash!! Silence again. \s
               """;
-      var expected =
-          String.join(
-              "\n",
-              "   An old silent pond...   ",
-              "A frog jumps into the pond,",
-              "  splash!! Silence again.  \n");
+      var expected = String.join(
+          "\n",
+          "   An old silent pond...   ",
+          "A frog jumps into the pond,",
+          "  splash!! Silence again.  \n");
       assertThat(actual).isEqualTo(expected);
     }
   }
@@ -361,15 +356,14 @@ public class Problems implements WithAssertions {
     @Test
     @DisplayName("様々な方法でベンチマーク")
     void runBench() throws RunnerException {
-      var opt =
-          new OptionsBuilder()
-              .include(P08Bench.class.getSimpleName())
-              .forks(1)
-              .warmupIterations(3)
-              .warmupTime(TimeValue.milliseconds(200))
-              .measurementIterations(3)
-              .measurementTime(TimeValue.milliseconds(200))
-              .build();
+      var opt = new OptionsBuilder()
+          .include(P08Bench.class.getSimpleName())
+          .forks(1)
+          .warmupIterations(3)
+          .warmupTime(TimeValue.milliseconds(200))
+          .measurementIterations(3)
+          .measurementTime(TimeValue.milliseconds(200))
+          .build();
       new Runner(opt).run();
     }
   }

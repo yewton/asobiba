@@ -39,8 +39,7 @@ public class ThongController {
       @Override String sharedFieldJava,
       String sharedFieldKotlin)
       implements JavaInterface, KotlinInterface {
-    @NotNull
-    @Override
+    @NotNull @Override
     public String getSharedFieldKotlin() {
       return sharedFieldKotlin;
     }

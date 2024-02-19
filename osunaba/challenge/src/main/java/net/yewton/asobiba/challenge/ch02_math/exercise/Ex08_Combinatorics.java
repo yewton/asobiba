@@ -85,11 +85,8 @@ public class Ex08_Combinatorics {
   /** a^2 + b^2 = c^2 + d^s を満たす a, b, c, d の組を見つける ( それぞれ 1 以上 100 未満の値まで )。 */
   public Set<ABCD> findABCDs() {
     return newRange()
-        .flatMap(
-            a ->
-                newRange()
-                    .flatMap(
-                        b -> newRange().flatMap(c -> newRange().map(d -> new ABCD(a, b, c, d)))))
+        .flatMap(a -> newRange()
+            .flatMap(b -> newRange().flatMap(c -> newRange().map(d -> new ABCD(a, b, c, d)))))
         .filter(ABCD::isValid)
         .collect(Collectors.toSet());
   }

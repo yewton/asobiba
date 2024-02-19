@@ -42,41 +42,33 @@ public class Ex07_RomanNumbers {
     final List<String> romanDigits =
         romanNumber.codePoints().mapToObj(cp -> String.valueOf((char) cp)).toList();
     final var size = romanDigits.size();
-    final Stream<Pair> romanDigitsZipWithNext =
-        IntStream.range(0, size)
-            .mapToObj(
-                i -> {
-                  final var current = Roman.valueOf(romanDigits.get(i));
-                  final var nextIndex = i + 1;
-                  final Roman next;
-                  if (nextIndex < size) {
-                    next = Roman.valueOf(romanDigits.get(nextIndex));
-                  } else {
-                    next = Roman.NULL;
-                  }
-                  return new Pair(current, next);
-                });
+    final Stream<Pair> romanDigitsZipWithNext = IntStream.range(0, size).mapToObj(i -> {
+      final var current = Roman.valueOf(romanDigits.get(i));
+      final var nextIndex = i + 1;
+      final Roman next;
+      if (nextIndex < size) {
+        next = Roman.valueOf(romanDigits.get(nextIndex));
+      } else {
+        next = Roman.NULL;
+      }
+      return new Pair(current, next);
+    });
     return romanDigitsZipWithNext
-        .mapToInt(
-            r ->
-                switch (r.current) {
-                  case I ->
-                      switch (r.next) {
-                        case V, X -> -(r.current.value);
-                        default -> r.current.value;
-                      };
-                  case X ->
-                      switch (r.next) {
-                        case L, C, D -> -(r.current.value);
-                        default -> r.current.value;
-                      };
-                  case C ->
-                      switch (r.next) {
-                        case D, M -> -(r.current.value);
-                        default -> r.current.value;
-                      };
-                  default -> r.current.value;
-                })
+        .mapToInt(r -> switch (r.current) {
+          case I -> switch (r.next) {
+            case V, X -> -(r.current.value);
+            default -> r.current.value;
+          };
+          case X -> switch (r.next) {
+            case L, C, D -> -(r.current.value);
+            default -> r.current.value;
+          };
+          case C -> switch (r.next) {
+            case D, M -> -(r.current.value);
+            default -> r.current.value;
+          };
+          default -> r.current.value;
+        })
         .sum();
   }
 
@@ -90,8 +82,9 @@ public class Ex07_RomanNumbers {
 
       final String s =
           switch (roman) {
-            case I, X, C, M ->
-                repeater == 4 ? roman.name() + roman.next().name() : roman.name().repeat(repeater);
+            case I, X, C, M -> repeater == 4
+                ? roman.name() + roman.next().name()
+                : roman.name().repeat(repeater);
             case V, L, D -> {
               if (repeater == 0) {
                 yield "";
