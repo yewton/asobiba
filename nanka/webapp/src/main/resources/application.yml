@@ -24,3 +24,7 @@ logging:
       netty:
         http:
           client: DEBUG
+server:
+  error:
+    whitelabel:
+      enabled: false
