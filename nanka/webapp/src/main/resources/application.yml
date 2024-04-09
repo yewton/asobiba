@@ -18,3 +18,9 @@ spring:
             clientId: FIXME
             clientSecret: FIXME
             redirectUri: "{baseUrl}/login/callback/{registrationId}"
+logging:
+  level:
+    reactor:
+      netty:
+        http:
+          client: DEBUG
