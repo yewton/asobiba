@@ -1,6 +1,6 @@
 services:
   db:
-    image: postgres:16.1@sha256:09f23e02d76670d3b346a3c00aa33a27cf57aab8341eedfcdaed41459d14f5c4
+    image: postgres:16.3@sha256:1bf73ccae25238fa555100080042f0b2f9be08eb757e200fe6afc1fc413a1b3c
     volumes:
       - db-data:/var/lib/postgresql/data
     environment:
