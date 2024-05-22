@@ -26,7 +26,7 @@ services:
     ports:
       - '16379:6379'
   zipkin:
-    image: openzipkin/zipkin-slim@sha256:69bf9b98696a3aa18480cfbf5c9929c1663c668b9c9190ffda6c1c66465ab789
+    image: openzipkin/zipkin-slim@sha256:de160920539a0a4ff8003397ab11ea6135b2d3262b5dad7a8c3fc0a3c63249e3
     ports:
       - 9411:9411
 
