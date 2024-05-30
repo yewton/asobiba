@@ -7,5 +7,5 @@ repositories {
 }
 
 dependencies {
-    implementation("io.btrace:btrace-boot:2.2.4")
+    implementation("io.btrace:btrace-boot:2.2.5")
 }
