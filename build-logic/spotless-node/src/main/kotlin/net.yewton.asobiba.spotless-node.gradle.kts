@@ -43,6 +43,6 @@ spotless {
 
 listOf("Typescript", "Scss").forEach {
     project.tasks.named<SpotlessTask>("spotless$it").configure {
-        dependsOn(tasks.nodeSetup, tasks.npmSetup)
+        dependsOn(tasks.nodeSetup, tasks.npmSetup, tasks.npmInstall)
     }
 }
