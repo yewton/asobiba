@@ -21,6 +21,9 @@ import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.infra.Blackhole;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
@@ -475,6 +478,80 @@ public class Problems implements WithAssertions {
         }
 
         return result.toString();
+      }
+    }
+  }
+
+  @Nested
+  public class P14_整数から文字列への変換 {
+
+    @Test
+    void 様々な方法でベンチマーク() throws RunnerException {
+      var opt = new OptionsBuilder()
+          .include(P14_整数から文字列への変換.class.getSimpleName())
+          .forks(1)
+          .warmupIterations(3)
+          .warmupTime(TimeValue.milliseconds(200))
+          .measurementIterations(3)
+          .measurementTime(TimeValue.milliseconds(200))
+          .build();
+      new Runner(opt).run();
+    }
+
+    @BenchmarkMode(Mode.AverageTime)
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
+    @SuppressWarnings({"unused", "SameParameterValue"})
+    @State(Scope.Benchmark)
+    public static class P14Bench {
+
+      private int v;
+      private Integer vo;
+
+      @Setup
+      public void setUp() {
+        int v = 948822;
+        //noinspection UnnecessaryBoxing
+        Integer vo = Integer.valueOf(948822);
+      }
+
+      @Benchmark
+      public String intToStringV1() {
+        return Integer.toString(v);
+      }
+
+      @Benchmark
+      public String intToStringV2() {
+        return "" + v;
+      }
+
+      @Benchmark
+      public String intToStringV3() {
+        return String.valueOf(v);
+      }
+
+      @Benchmark
+      public String intToStringV4() {
+        return String.format("%d", v);
+      }
+
+      @Benchmark
+      public String integerToStringV1() {
+        return Integer.toString(vo);
+      }
+
+      @Benchmark
+      public String integerToStringV2() {
+        return "" + vo;
+      }
+
+      @Benchmark
+      public String integerToStringV3() {
+        return String.valueOf(vo);
+      }
+
+      @Benchmark
+      public String integerToStringV4() {
+        return String.format("%d", vo);
       }
     }
   }
