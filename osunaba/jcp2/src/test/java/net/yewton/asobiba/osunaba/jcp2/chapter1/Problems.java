@@ -5,10 +5,12 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import java.text.MessageFormat;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
+import org.apache.bcel.Repository;
 import org.assertj.core.api.WithAssertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -403,6 +405,77 @@ public class Problems implements WithAssertions {
                      eerrqq
                      """,
               truthy));
+    }
+  }
+
+  @Nested
+  class P13_文字列結合 {
+    @Test
+    void 様々な文字列結合処理のバイトコード出力() throws Exception {
+      var objectClazz = Repository.lookupClass(
+          "net.yewton.asobiba.osunaba.jcp2.chapter1.Problems$P13_文字列結合$Strings");
+      Stream.of(
+              "concatViaPlus",
+              "concatViaStringBuilder",
+              "concatListViaPlus",
+              "concatListViaStringBuilder")
+          .forEach(methodName -> {
+            try {
+              final var method = methodName.contains("List")
+                  ? Strings.class.getMethod(methodName, List.class)
+                  : Strings.class.getMethod(
+                      methodName, String.class, String.class, String.class, String.class);
+              System.out.printf(
+                  "## %s\n\n```\n%s\n```\n\n",
+                  methodName, objectClazz.getMethod(method).getCode());
+            } catch (NoSuchMethodException e) {
+              fail("存在しないメソッド: " + methodName, e);
+            }
+          });
+    }
+
+    @SuppressWarnings("unused") // 動的に呼び出されるため
+    public static class Strings {
+
+      private Strings() {
+        throw new AssertionError("Cannot be instantiated");
+      }
+
+      public static String concatViaPlus(String str1, String str2, String str3, String str4) {
+
+        return str1 + str2 + str3 + str4;
+      }
+
+      public static String concatViaStringBuilder(
+          String str1, String str2, String str3, String str4) {
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(str1).append(str2).append(str3).append(str4);
+
+        return sb.toString();
+      }
+
+      public static String concatListViaPlus(List<String> strs) {
+
+        String result = "";
+        for (String str : strs) {
+          result = result + str;
+        }
+
+        return result;
+      }
+
+      public static String concatListViaStringBuilder(List<String> strs) {
+
+        StringBuilder result = new StringBuilder();
+
+        for (String str : strs) {
+          result.append(str);
+        }
+
+        return result.toString();
+      }
     }
   }
 }
