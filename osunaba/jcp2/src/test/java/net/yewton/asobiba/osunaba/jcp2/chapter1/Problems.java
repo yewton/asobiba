@@ -232,6 +232,14 @@ public class Problems implements WithAssertions {
   @Nested
   public class P08_変数や式を含むテキストブロック {
 
+    /*
+     * Benchmark                                                                  Mode  Cnt  Score   Error  Units
+     * Problems.P08_変数や式を含むテキストブロック.P08Bench.benchConcat           avgt    3  0.154 ± 0.043  us/op
+     * Problems.P08_変数や式を含むテキストブロック.P08Bench.benchMessageFormat    avgt    3  0.465 ± 0.035  us/op
+     * Problems.P08_変数や式を含むテキストブロック.P08Bench.benchStringBuilder    avgt    3  0.187 ± 0.014  us/op
+     * Problems.P08_変数や式を含むテキストブロック.P08Bench.benchStringFormat     avgt    3  0.130 ± 0.019  us/op
+     * Problems.P08_変数や式を含むテキストブロック.P08Bench.benchStringFormatted  avgt    3  0.135 ± 0.069  us/op
+     */
     @Test
     void 様々な方法でベンチマーク() throws RunnerException {
       var opt = new OptionsBuilder()
@@ -444,11 +452,40 @@ public class Problems implements WithAssertions {
         throw new AssertionError("Cannot be instantiated");
       }
 
+      /*
+       * Code(maxStack = 4, maxLocals = 4, code_length = 10)
+       * 0:    aload_0
+       * 1:    aload_1
+       * 2:    aload_2
+       * 3:    aload_3
+       * 4:    invokedynamic	0:makeConcatWithConstants (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String; (14)	00
+       * 9:    areturn
+       */
       public static String concatViaPlus(String str1, String str2, String str3, String str4) {
 
         return str1 + str2 + str3 + str4;
       }
 
+      /*
+       * Code(maxStack = 2, maxLocals = 5, code_length = 34)
+       * 0:    new		<java.lang.StringBuilder> (18)
+       * 3:    dup
+       * 4:    invokespecial	java.lang.StringBuilder.<init> ()V (20)
+       * 7:    astore		%4
+       * 9:    aload		%4
+       * 11:   aload_0
+       * 12:   invokevirtual	java.lang.StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder; (21)
+       * 15:   aload_1
+       * 16:   invokevirtual	java.lang.StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder; (21)
+       * 19:   aload_2
+       * 20:   invokevirtual	java.lang.StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder; (21)
+       * 23:   aload_3
+       * 24:   invokevirtual	java.lang.StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder; (21)
+       * 27:   pop
+       * 28:   aload		%4
+       * 30:   invokevirtual	java.lang.StringBuilder.toString ()Ljava/lang/String; (25)
+       * 33:   areturn
+       */
       public static String concatViaStringBuilder(
           String str1, String str2, String str3, String str4) {
 
@@ -459,6 +496,28 @@ public class Problems implements WithAssertions {
         return sb.toString();
       }
 
+      /*
+       * Code(maxStack = 2, maxLocals = 4, code_length = 42)
+       * 0:    ldc		"" (29)
+       * 2:    astore_1
+       * 3:    aload_0
+       * 4:    invokeinterface	java.util.List.iterator ()Ljava/util/Iterator; (31)	1	0
+       * 9:    astore_2
+       * 10:   aload_2
+       * 11:   invokeinterface	java.util.Iterator.hasNext ()Z (37)	1	0
+       * 16:   ifeq		#40
+       * 19:   aload_2
+       * 20:   invokeinterface	java.util.Iterator.next ()Ljava/lang/Object; (43)	1	0
+       * 25:   checkcast		<java.lang.String> (47)
+       * 28:   astore_3
+       * 29:   aload_1
+       * 30:   aload_3
+       * 31:   invokedynamic	1:makeConcatWithConstants (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String; (49)	00
+       * 36:   astore_1
+       * 37:   goto		#10
+       * 40:   aload_1
+       * 41:   areturn
+       */
       public static String concatListViaPlus(List<String> strs) {
 
         String result = "";
@@ -469,6 +528,31 @@ public class Problems implements WithAssertions {
         return result;
       }
 
+      /*
+       * Code(maxStack = 2, maxLocals = 4, code_length = 48)
+       * 0:    new		<java.lang.StringBuilder> (18)
+       * 3:    dup
+       * 4:    invokespecial	java.lang.StringBuilder.<init> ()V (20)
+       * 7:    astore_1
+       * 8:    aload_0
+       * 9:    invokeinterface	java.util.List.iterator ()Ljava/util/Iterator; (31)	1	0
+       * 14:   astore_2
+       * 15:   aload_2
+       * 16:   invokeinterface	java.util.Iterator.hasNext ()Z (37)	1	0
+       * 21:   ifeq		#43
+       * 24:   aload_2
+       * 25:   invokeinterface	java.util.Iterator.next ()Ljava/lang/Object; (43)	1	0
+       * 30:   checkcast		<java.lang.String> (47)
+       * 33:   astore_3
+       * 34:   aload_1
+       * 35:   aload_3
+       * 36:   invokevirtual	java.lang.StringBuilder.append (Ljava/lang/String;)Ljava/lang/StringBuilder; (21)
+       * 39:   pop
+       * 40:   goto		#15
+       * 43:   aload_1
+       * 44:   invokevirtual	java.lang.StringBuilder.toString ()Ljava/lang/String; (25)
+       * 47:   areturn
+       */
       public static String concatListViaStringBuilder(List<String> strs) {
 
         StringBuilder result = new StringBuilder();
@@ -485,6 +569,16 @@ public class Problems implements WithAssertions {
   @Nested
   public class P14_整数から文字列への変換 {
 
+    /*
+     * Benchmark                                                       Mode  Cnt  Score    Error  Units
+     * Problems.P14_整数から文字列への変換.P14Bench.intToStringV1      avgt    3  0.004 ±  0.001  us/op
+     * Problems.P14_整数から文字列への変換.P14Bench.intToStringV2      avgt    3  0.004 ±  0.001  us/op
+     * Problems.P14_整数から文字列への変換.P14Bench.intToStringV3      avgt    3  0.004 ±  0.001  us/op
+     * Problems.P14_整数から文字列への変換.P14Bench.intToStringV4      avgt    3  0.177 ±  0.049  us/op
+     * Problems.P14_整数から文字列への変換.P14Bench.integerToStringV2  avgt    3  0.002 ±  0.001  us/op
+     * Problems.P14_整数から文字列への変換.P14Bench.integerToStringV3  avgt    3  0.001 ±  0.001  us/op
+     * Problems.P14_整数から文字列への変換.P14Bench.integerToStringV4  avgt    3  0.063 ±  0.446  us/op
+     */
     @Test
     void 様々な方法でベンチマーク() throws RunnerException {
       var opt = new OptionsBuilder()
