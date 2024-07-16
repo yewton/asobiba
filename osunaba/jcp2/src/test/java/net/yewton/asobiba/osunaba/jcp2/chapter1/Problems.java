@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Named.named;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import java.text.MessageFormat;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -647,6 +648,41 @@ public class Problems implements WithAssertions {
       public String integerToStringV4() {
         return String.format("%d", vo);
       }
+    }
+  }
+
+  // StringTemplate は、まだ Preview なので飛ばす
+  @Nested
+  public class P15_文字列テンプレート {
+    private final LocalDate fiscalDate = LocalDate.now();
+    private final double value = 4552.2367;
+    private final String employeeCode = "RN4555";
+
+    private final String expected = "{\"sale\": {\n"
+        + "    \"id\": 1,\n"
+        + "    \"details\": {\n"
+        + "        \"fiscal_year\": %d,\n".formatted(fiscalDate.getYear())
+        + "        \"employee_nr\": \"%s\",\n".formatted(employeeCode)
+        + "        \"value\": %.2f\n".formatted(value)
+        + "    }\n"
+        + "}";
+
+    @Test
+    void case01_String_formatted() {
+      assertThat(
+              """
+                         {"sale": {
+                             "id": 1,
+                             "details": {
+                                 "fiscal_year": %d,
+                                 "employee_nr": "%s",
+                                 "value": %.2f
+                             }
+                         }
+                         """
+                  .stripTrailing()
+                  .formatted(fiscalDate.getYear(), employeeCode, value))
+          .isEqualTo(expected);
     }
   }
 }
