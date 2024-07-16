@@ -57,6 +57,6 @@ val npmInstallAll by tasks.registering {
 // IntelliJ IDEA プロジェクトのデフォルトがこれで決まる
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))
+        languageVersion.set(JavaLanguageVersion.of(21))
     }
 }
