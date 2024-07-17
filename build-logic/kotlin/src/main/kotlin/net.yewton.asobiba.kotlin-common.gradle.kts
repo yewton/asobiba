@@ -14,10 +14,6 @@ dependencies {
     testImplementation("io.kotest:kotest-runner-junit5")
 }
 
-kotlin {
-    jvmToolchain(17)
-}
-
 tasks.devOnly {
     dependsOn(tasks.named("detektAndCorrect"))
 }
