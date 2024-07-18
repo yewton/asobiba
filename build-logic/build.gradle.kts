@@ -1,18 +1,23 @@
+plugins {
+    base
+}
+
 allprojects {
     group = "net.yewton.asobiba.build-logic"
 }
 
-// https://discuss.gradle.org/t/gradle-clean-all-projects/10618/3
-tasks.register("cleanAll") {
-    group = BasePlugin.BUILD_GROUP
-    subprojects.forEach { project ->
-        dependsOn(project.tasks.matching { it.name == "clean" })
+listOf(
+    LifecycleBasePlugin.ASSEMBLE_TASK_NAME,
+    LifecycleBasePlugin.BUILD_TASK_NAME,
+    LifecycleBasePlugin.CHECK_TASK_NAME,
+    LifecycleBasePlugin.CLEAN_TASK_NAME,
+).forEach { taskName ->
+    tasks.named(taskName) {
+        dependsOn(subprojects.map { it.tasks.named(taskName) })
     }
 }
 
-tasks.register("autoCorrectAll") {
-    group = LifecycleBasePlugin.VERIFICATION_GROUP
-    subprojects.forEach { project ->
-        dependsOn(project.tasks.matching { it.name == "detektAndCorrect" })
-    }
+tasks.register("autoCorrect") {
+    group = "verification"
+    dependsOn(tasks.named("detektAndCorrect"))
 }

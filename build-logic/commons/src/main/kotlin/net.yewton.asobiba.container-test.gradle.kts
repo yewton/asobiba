@@ -1,7 +1,8 @@
 plugins {
     java
-    `jvm-test-suite`
 }
+
+// https://docs.gradle.org/current/userguide/java_testing.html#sec:configuring_java_integration_tests
 
 val containerTest: SourceSet by sourceSets.creating {
     compileClasspath += sourceSets.main.get().output
@@ -17,9 +18,9 @@ dependencies {
     containerTestImplementation(platform("net.yewton.asobiba.platform:container-test-platform"))
 }
 
-tasks.register<Test>("containerTest") {
+val containerTestTask by tasks.registering(Test::class) {
     description = "Runs container tests."
-    group = "verification"
+    group = LifecycleBasePlugin.VERIFICATION_GROUP
 
     containerTest.let {
         testClassesDirs = it.output.classesDirs
@@ -27,4 +28,12 @@ tasks.register<Test>("containerTest") {
     }
 
     useJUnitPlatform()
+    val enablePropertyName = "enableContainerTest"
+    onlyIf("$enablePropertyName が指定されていない場合はスキップします") {
+        providers.gradleProperty(enablePropertyName).isPresent
+    }
+}
+
+tasks.check {
+    dependsOn(containerTestTask)
 }

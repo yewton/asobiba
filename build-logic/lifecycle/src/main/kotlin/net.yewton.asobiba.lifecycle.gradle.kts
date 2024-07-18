@@ -1,27 +1,25 @@
-import org.gradle.configurationcache.extensions.capitalized
+/*
+ * Composite Build だとサブプロジェクトのタスクを
+ * ルートから暗黙的に実行することが出来ないので明示的に依存関係を設定する。
+ * https://github.com/gradle/gradle/issues/20863
+ */
+plugins {
+    base
+}
 
 listOf(
-    ("build" to listOf("build", "clean")),
-    ("verification" to listOf("check", "containerTest"))
-).forEach { (groupName, taskNames) ->
-    taskNames.forEach { taskName ->
-        tasks.register("${taskName}All") {
-            group = groupName
-            description = "${taskName.capitalized()} all of the '${project.name}' component"
-            subprojects {
-                this@register.dependsOn(provider { tasks.matching { it.name == taskName } })
-            }
-        }
+    LifecycleBasePlugin.ASSEMBLE_TASK_NAME,
+    LifecycleBasePlugin.BUILD_TASK_NAME,
+    LifecycleBasePlugin.CHECK_TASK_NAME,
+    LifecycleBasePlugin.CLEAN_TASK_NAME,
+).forEach { taskName ->
+    tasks.named(taskName) {
+        dependsOn(subprojects.map { it.tasks.named(taskName) })
     }
 }
 
-tasks.register("autoCorrectAll") {
+tasks.register("autoCorrect") {
     group = "verification"
-    subprojects {
-        // タスクが未定義だった場合に findByName だと null になってエラーになる
-        val autoCorrectTasks = provider {
-            tasks.matching { listOf("spotlessApply", "detektAndCorrect").contains(it.name) }
-        }
-        this@register.dependsOn(autoCorrectTasks)
-    }
+    // タスクが未定義だった場合に findByName だと null になってエラーになる
+    dependsOn(tasks.named { listOf("spotlessApply", "detektAndCorrect").contains(it) })
 }

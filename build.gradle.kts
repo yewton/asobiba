@@ -9,24 +9,24 @@ val excludeProjects = listOf("build-logic", "build-logic-lint", "platforms", "bt
 val subProjects = gradle.includedBuilds.map { it.name }.filterNot { excludeProjects.contains(it) }
 
 listOf(
-    ("build" to listOf("build", "clean")),
-    ("verification" to listOf("check", "containerTest", "autoCorrect"))
-).forEach { (groupName, taskNames) ->
-    taskNames.forEach {
-        tasks.register("${it}All") {
-            group = groupName
-            description = "Run all $it"
-            dependsOn(tasks.matching { task -> it == task.name })
-            subProjects.forEach { project ->
-                dependsOn(gradle.includedBuild(project).task(":${it}All"))
-            }
-        }
+    LifecycleBasePlugin.BUILD_TASK_NAME,
+    LifecycleBasePlugin.ASSEMBLE_TASK_NAME,
+    LifecycleBasePlugin.CLEAN_TASK_NAME,
+    LifecycleBasePlugin.CHECK_TASK_NAME
+).forEach { taskName ->
+    tasks.named(taskName) {
+        dependsOn(subProjects.map { gradle.includedBuild(it).task(":${taskName}") })
     }
 }
 
-tasks.named("autoCorrectAll") {
-    // build-logic は autoCorrectAll のみ対応
-    dependsOn(gradle.includedBuild("build-logic").task(":autoCorrectAll"))
+tasks.register("autoCorrect") {
+    group = LifecycleBasePlugin.VERIFICATION_GROUP
+    dependsOn(subProjects.map {  gradle.includedBuild(it).task(":$name") })
+}
+
+tasks.named("autoCorrect") {
+    // build-logic は autoCorrect のみ対応
+    dependsOn(gradle.includedBuild("build-logic").task(":autoCorrect"))
 }
 
 // https://zenn.dev/cybozu_ept/articles/compare-renovate-dry-run
