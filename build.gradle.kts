@@ -22,9 +22,6 @@ listOf(
 tasks.register("autoCorrect") {
     group = LifecycleBasePlugin.VERIFICATION_GROUP
     dependsOn(subProjects.map {  gradle.includedBuild(it).task(":$name") })
-}
-
-tasks.named("autoCorrect") {
     // build-logic は autoCorrect のみ対応
     dependsOn(gradle.includedBuild("build-logic").task(":autoCorrect"))
 }

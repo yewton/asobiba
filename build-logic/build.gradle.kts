@@ -19,5 +19,5 @@ listOf(
 
 tasks.register("autoCorrect") {
     group = "verification"
-    dependsOn(tasks.named("detektAndCorrect"))
+    dependsOn(subprojects.map { it.tasks.named("detektAndCorrect") })
 }
