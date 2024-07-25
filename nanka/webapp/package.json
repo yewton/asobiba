@@ -13,7 +13,7 @@
     "eslint-plugin-import": "2.29.1",
     "eslint-plugin-promise": "6.6.0",
     "glob": "10.4.5",
-    "typescript": "5.5.3",
+    "typescript": "5.5.4",
     "vite": "5.3.4"
   }
 }
