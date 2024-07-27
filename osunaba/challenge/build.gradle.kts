@@ -6,5 +6,5 @@ plugins {
 
 dependencies {
     implementation("org.apache.commons:commons-collections4:4.4")
-    implementation("org.apache.commons:commons-lang3:3.14.0")
+    implementation("org.apache.commons:commons-lang3:3.15.0")
 }
