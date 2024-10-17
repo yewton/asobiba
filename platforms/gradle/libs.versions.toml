@@ -19,7 +19,7 @@ kotest-runner-junit5 = { module = "io.kotest:kotest-runner-junit5", version.ref 
 kotlin-bom = "org.jetbrains.kotlin:kotlin-bom:1.9.25"
 node-plugin = "com.github.node-gradle:gradle-node-plugin:7.0.2"
 spotless-plugin = "com.diffplug.spotless:spotless-plugin-gradle:6.25.0"
-spring-boot-plugin = "org.springframework.boot:spring-boot-gradle-plugin:3.3.2"
+spring-boot-plugin = "org.springframework.boot:spring-boot-gradle-plugin:3.3.4"
 spring-dependency-management-plugin = "io.spring.dependency-management:io.spring.dependency-management.gradle.plugin:1.1.6"
 springdoc-openapi-starter-common = { module = "org.springdoc:springdoc-openapi-starter-common", version.ref = "spring-doc" }
 springdoc-openapi-starter-webflux-ui = { module = "org.springdoc:springdoc-openapi-starter-webflux-ui", version.ref = "spring-doc" }
