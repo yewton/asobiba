@@ -5,6 +5,7 @@ import net.yewton.asobiba.nanka.web.unsafe.rememberme.MyUnsafeRememberMeAuthenti
 import net.yewton.asobiba.nanka.web.unsafe.rememberme.MyUnsafeRememberMeServices
 import net.yewton.asobiba.nanka.web.unsafe2.MyUnsafe2AuthenticationProcessingFilterConfigurer
 import net.yewton.asobiba.nanka.web.unsafe2.MyUnsafe2AuthenticationProvider
+import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest
 import org.springframework.boot.web.servlet.FilterRegistrationBean
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -37,12 +38,14 @@ class SecurityConfig(
 ) {
 
     @Bean
+    @Suppress("LongMethod")
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http {
             authorizeHttpRequests {
-                listOf("/", "/login", "/login2", "/error", "/assets/**", "/front/**", "/js/**").forEach {
+                listOf("/", "/login", "/login2", "/error", "/assets/**", "/front/**", "/js/**", "/api/**").forEach {
                     authorize(it, permitAll)
                 }
+                authorize(EndpointRequest.toAnyEndpoint(), permitAll)
                 authorize(
                     "/my/sensitive",
                     AuthenticatedAuthorizationManager.fullyAuthenticated<RequestAuthorizationContext>().apply {
@@ -68,6 +71,7 @@ class SecurityConfig(
                 })
             }
             csrf {
+                ignoringRequestMatchers(EndpointRequest.toAnyEndpoint())
                 csrfTokenRepository = HttpSessionCsrfTokenRepository()
             }
             logout {

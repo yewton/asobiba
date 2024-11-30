@@ -28,3 +28,25 @@ server:
   error:
     whitelabel:
       enabled: false
+resilience4j:
+  circuitbreaker:
+    instances:
+      failure:
+        registerHealthIndicator: true
+        slidingWindowSize: 20
+  retry:
+    instances:
+      failure:
+        maxAttempts: 5
+        waitDuration: 500ms
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    circuitbreakers:
+      enabled: true

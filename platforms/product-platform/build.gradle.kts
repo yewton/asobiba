@@ -16,5 +16,7 @@ dependencies {
         api(libs.springdoc.openapi.starter.common)
         api(libs.springdoc.openapi.starter.webflux.ui)
         api(libs.therapi.runtime.javadoc.core)
+        api(libs.resilience4j.spring.boot3)
+        api(libs.resilience4j.reactor)
     }
 }
