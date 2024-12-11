@@ -7,7 +7,7 @@ plugins {
 
 configure<NodeExtension> {
     download.set(true)
-    version.set("20.18.0")
+    version.set("20.18.1")
     npmVersion.set("10.9.0")
 }
 
