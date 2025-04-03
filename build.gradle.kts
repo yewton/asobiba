@@ -28,7 +28,7 @@ tasks.register("autoCorrect") {
 
 // https://zenn.dev/cybozu_ept/articles/compare-renovate-dry-run
 val renovateDebug by tasks.registering(NpxTask::class) {
-    command.set("renovate@38.128.6")
+    command.set("renovate@38.142.7")
     args.add("--platform=local")
     environment.set(
         mapOf(
