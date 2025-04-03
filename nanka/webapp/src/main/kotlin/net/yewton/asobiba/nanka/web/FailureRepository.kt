@@ -15,7 +15,7 @@ import reactor.core.publisher.Mono
 @Component
 class FailureRepository(webClientBuilder: WebClient.Builder) : Logging {
 
-    private val webClient: WebClient = webClientBuilder.clone().baseUrl("https://httpbin.org/")
+    private val webClient: WebClient = webClientBuilder.baseUrl("https://httpbin.org/")
         .filter(
             ExchangeFilterFunction.ofResponseProcessor { response ->
                 logger.info(

@@ -15,7 +15,7 @@ class TextsRepository(webClientBuilder: WebClient.Builder) : Logging {
 
     data class Text(val title: String, val author: String, val genre: String, val content: String)
 
-    private val webClient: WebClient = webClientBuilder.clone().baseUrl("https://fakerapi.it/api/v1/")
+    private val webClient: WebClient = webClientBuilder.baseUrl("https://fakerapi.it/api/v1/")
         .filter(
             ExchangeFilterFunction.ofResponseProcessor { response ->
                 logger.info(
