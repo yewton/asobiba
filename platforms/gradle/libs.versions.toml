@@ -21,7 +21,7 @@ kotlin-bom = "org.jetbrains.kotlin:kotlin-bom:1.9.25"
 node-plugin = "com.github.node-gradle:gradle-node-plugin:7.1.0"
 spotless-plugin = "com.diffplug.spotless:spotless-plugin-gradle:6.25.0"
 spring-boot-plugin = "org.springframework.boot:spring-boot-gradle-plugin:3.4.4"
-spring-dependency-management-plugin = "io.spring.dependency-management:io.spring.dependency-management.gradle.plugin:1.1.6"
+spring-dependency-management-plugin = "io.spring.dependency-management:io.spring.dependency-management.gradle.plugin:1.1.7"
 springdoc-openapi-starter-common = { module = "org.springdoc:springdoc-openapi-starter-common", version.ref = "spring-doc" }
 springdoc-openapi-starter-webflux-ui = { module = "org.springdoc:springdoc-openapi-starter-webflux-ui", version.ref = "spring-doc" }
 testcontainers-bom = "org.testcontainers:testcontainers-bom:1.20.6"
