@@ -1,0 +1,34 @@
+# NOTE: You must disable the banner and the console logging
+# to allow the STDIO transport to work !!!
+spring:
+  application:
+    name: mcp
+  main:
+    banner-mode: off
+    web-application-type: none
+  ai:
+    mcp:
+      client:
+        stdio:
+          root-change-notification: true
+          connections:
+            server1:
+              command: java
+        toolcallback: # https://github.com/spring-projects/spring-ai/blob/v1.0.0-M7/auto-configurations/mcp/spring-ai-autoconfigure-mcp-client/src/main/java/org/springframework/ai/mcp/client/autoconfigure/McpToolCallbackAutoConfiguration.java#L55-L59
+          enabled: true
+    model:
+      audio:
+        transcription: none
+        speech: none
+      chat: none
+      embedding: none
+      image: none
+      moderation: none
+logging:
+  level:
+    org.spring.ai: DEBUG
+    java.net.http: DEBUG
+  pattern:
+    console:
+  file:
+    name: ./logs/mcp-client.log
