@@ -9,8 +9,8 @@
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": [
-        "net\\.yewton\\.asobiba\\.node\\.gradle\\.kts$"
+      "managerFilePatterns": [
+        "/net\\.yewton\\.asobiba\\.node\\.gradle\\.kts$/"
       ],
       "matchStrings": [
         "version\\.set\\(\"(?<currentValue>.+?)\"\\)"
@@ -21,8 +21,8 @@
     },
     {
       "customType": "regex",
-      "fileMatch": [
-        "net\\.yewton\\.asobiba\\.node\\.gradle\\.kts$"
+      "managerFilePatterns": [
+        "/net\\.yewton\\.asobiba\\.node\\.gradle\\.kts$/"
       ],
       "matchStrings": [
         "npmVersion\\.set\\(\"(?<currentValue>.+?)\"\\)"
@@ -33,8 +33,8 @@
     },
     {
       "customType": "regex",
-      "fileMatch": [
-        "^build\\.gradle\\.kts$"
+      "managerFilePatterns": [
+        "/^build\\.gradle\\.kts$/"
       ],
       "matchStrings": [
         "\"renovate@(?<currentValue>.+?)\""
