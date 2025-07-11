@@ -21,7 +21,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter")
     // Platform で指定されているから？↓で指定されているバージョンより上の Spring Boot が落ちてくる。正しい。
-    implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3")
+    implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.5")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
