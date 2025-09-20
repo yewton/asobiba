@@ -7,4 +7,13 @@ module.exports = {
   ],
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
+  parserOptions: {
+    tsconfigRootDir: __dirname,
+  },
+  rules: {
+    '@typescript-eslint/no-unused-expressions': [
+      'error',
+      { allowShortCircuit: true },
+    ],
+  },
 }

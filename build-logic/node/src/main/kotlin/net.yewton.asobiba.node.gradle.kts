@@ -12,6 +12,7 @@ configure<NodeExtension> {
 }
 
 tasks.npmInstall {
+    args.add("--legacy-peer-deps")
     nodeModulesOutputFilter {
         // 何故か npm install するたびに変更されてしまうので
         // https://github.com/node-gradle/gradle-node-plugin/blob/master/docs/faq.md#how-do-i-ignore-some-files-of-the-node_modules-directory-that-are-modified-by-the-build-and-prevent-tasks-from-being-up-to-date-
