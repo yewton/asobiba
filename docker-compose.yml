@@ -1,6 +1,6 @@
 services:
   db:
-    image: postgres:17.0@sha256:f176fef320ed02c347e9f85352620945547a9a23038f02b57cf7939a198182ae
+    image: postgres:17.6
     volumes:
       - db-data:/var/lib/postgresql/data
     environment:
@@ -10,7 +10,7 @@ services:
     ports:
       - '15432:5432'
   db2:
-    image: mariadb:11.5.2@sha256:2d50fe0f77dac919396091e527e5e148a9de690e58f32875f113bef6506a17f5
+    image: mariadb:11.8.3
     volumes:
       - db2-data:/var/lib/mysql
     environment:
@@ -22,11 +22,13 @@ services:
       - '13306:3306'
 
   redis:
-    image: redis:7.4.2@sha256:bd41d55aae1ecff61b2fafd0d66761223fe94a60373eb6bb781cfbb570a84079
+    image: redis:7.4.5
     ports:
       - '16379:6379'
   zipkin:
     image: openzipkin/zipkin-slim@sha256:91d5af36fe3ee843463d89b033bfd1fb69fc1afa3339b77b6ea7d3710ad82024
+    environment:
+      - MANAGEMENT_ENDPOINT_HEAPDUMP_ENABLED=false
     ports:
       - 9411:9411
 
