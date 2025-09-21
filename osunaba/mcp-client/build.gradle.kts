@@ -5,7 +5,7 @@ plugins {
 }
 
 dependencies {
-    implementation(platform("org.springframework.ai:spring-ai-bom:1.0.0-M7"))
+    implementation(platform("org.springframework.ai:spring-ai-bom:1.0.2"))
     implementation("org.springframework:spring-web")
 
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
