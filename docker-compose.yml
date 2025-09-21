@@ -26,7 +26,7 @@ services:
     ports:
       - '16379:6379'
   zipkin:
-    image: openzipkin/zipkin-slim@sha256:91d5af36fe3ee843463d89b033bfd1fb69fc1afa3339b77b6ea7d3710ad82024
+    image: openzipkin/zipkin-slim@sha256:d951994017185bce1c859b62e13adf640e26c37e08b90ca2e4de2669dc1aad87
     environment:
       - MANAGEMENT_ENDPOINT_HEAPDUMP_ENABLED=false
     ports:
