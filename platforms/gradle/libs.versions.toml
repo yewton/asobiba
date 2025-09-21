@@ -1,5 +1,5 @@
 [versions]
-detekt = "1.23.7"
+detekt = "1.23.8"
 kotest = "5.9.1"
 spring-doc = "2.6.0"
 therapi-runtime-javadoc = "0.15.0"
