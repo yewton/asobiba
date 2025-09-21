@@ -1,6 +1,6 @@
 services:
   db:
-    image: postgres:17.6
+    image: postgres:17.6@sha256:feff5b24fedd610975a1f5e743c51a4b360437f4dc3a11acf740dcd708f413f6
     volumes:
       - db-data:/var/lib/postgresql/data
     environment:
@@ -10,7 +10,7 @@ services:
     ports:
       - '15432:5432'
   db2:
-    image: mariadb:11.8.3
+    image: mariadb:11.8.3@sha256:851a6020c97b9eae7736b6fb275800601d64635222054d3a1b1b3c4abdfa117a
     volumes:
       - db2-data:/var/lib/mysql
     environment:
@@ -22,7 +22,7 @@ services:
       - '13306:3306'
 
   redis:
-    image: redis:7.4.5
+    image: redis:7.4.5@sha256:edfad62e79bbbad4bc6efd528f6a7ca95546f4c0ab5ca504a83952a8cbdc13ae
     ports:
       - '16379:6379'
   zipkin:
