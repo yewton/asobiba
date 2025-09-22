@@ -39,7 +39,7 @@ tasks.register<NpmTask>("lint") {
 }
 
 plugins.withId("base") {
-    tasks.named("check").configure {
+    tasks.named(LifecycleBasePlugin.CHECK_TASK_NAME).configure {
         dependsOn(tasks.named("lint"))
     }
 }
