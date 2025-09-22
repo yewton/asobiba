@@ -1,4 +1,5 @@
 import com.github.gradle.node.NodeExtension
+import com.github.gradle.node.npm.task.NpmTask
 import com.github.gradle.node.npm.task.NpxTask
 
 plugins {
@@ -29,4 +30,17 @@ val npmCheckUpdate by registeringNpmCheckUpdateTask { }
 
 val npmUpgrade by registeringNpmCheckUpdateTask {
     args.add("--upgrade")
+}
+
+if (project.file("package.json").exists()) {
+    tasks.register<NpmTask>("lint") {
+        dependsOn(tasks.npmInstall)
+        npmCommand.set(listOf("run", "lint"))
+    }
+
+    plugins.withId("java-base") {
+        tasks.named("check").configure {
+            dependsOn(tasks.named("lint"))
+        }
+    }
 }

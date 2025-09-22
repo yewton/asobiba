@@ -1,12 +1,10 @@
 import { defineConfig } from 'vite';
-import eslint from 'vite-plugin-eslint';
 import path from 'path';
 import { globSync } from 'glob';
 
 const root = path.resolve(__dirname, 'src/main')
 
 export default defineConfig({
-    plugins: [eslint()],
     root: root,
     build: {
         outDir: 'resources/static/js',
