@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import path from 'path';
 import { globSync } from 'glob';
 
-const isPreview = process.env.PREVIEW!!;
+const isPreview = Boolean(process.env.PREVIEW);
 const root = path.resolve(__dirname, 'src/' + (isPreview ? 'preview' : 'main'))
 const outDir = isPreview ? 'preview' : 'front';
 
