@@ -24,25 +24,16 @@ val (nodeExecPath, npmExecPath) = run {
 }
 
 spotless {
-//    typescript {
-//        target("src/*/ts/**/*.ts", "src/*/front/**/*.ts")
-//        eslint()
-//            .nodeExecutable(nodeExecPath.get())
-//            .npmExecutable(npmExecPath.get())
-//            .configFile(".eslintrc.cjs")
-//            .tsconfigFile("tsconfig.json")
-//    }
-
-//    format("scss") {
-//        target("src/*/styles/**/*.scss")
-//        prettier()
-//            .nodeExecutable(nodeExecPath.get())
-//            .npmExecutable(npmExecPath.get())
-//    }
+    format("scss") {
+        target("src/*/styles/**/*.scss")
+        prettier()
+            .nodeExecutable(nodeExecPath.get())
+            .npmExecutable(npmExecPath.get())
+    }
 }
 
-//listOf("Typescript", "Scss").forEach {
-//    project.tasks.named<SpotlessTask>("spotless$it").configure {
-//        dependsOn(tasks.nodeSetup, tasks.npmSetup, tasks.npmInstall)
-//    }
-//}
+listOf("Scss").forEach {
+    project.tasks.named<SpotlessTask>("spotless$it").configure {
+        dependsOn(tasks.nodeSetup, tasks.npmSetup, tasks.npmInstall)
+    }
+}
