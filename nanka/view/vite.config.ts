@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+import eslint from 'vite-plugin-eslint';
 import path from 'path';
 import { globSync } from 'glob';
 
@@ -7,6 +8,7 @@ const root = path.resolve(__dirname, 'src/' + (isPreview ? 'preview' : 'main'))
 const outDir = isPreview ? 'preview' : 'front';
 
 export default defineConfig({
+    plugins: [eslint()],
     root: root,
     resolve: {
         alias: {
