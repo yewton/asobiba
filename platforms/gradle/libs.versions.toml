@@ -32,4 +32,4 @@ resilience4j-reactor = { module = "io.github.resilience4j:resilience4j-reactor",
 
 [plugins]
 version-catalog-update = "nl.littlerobots.version-catalog-update:0.8.5"
-versions = "com.github.ben-manes.versions:0.51.0"
+versions = "com.github.ben-manes.versions:0.52.0"
