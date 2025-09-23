@@ -17,7 +17,7 @@ package net.yewton.asobiba.mcp.client
 
 import org.springframework.ai.chat.client.ChatClient
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor
-import org.springframework.ai.chat.memory.InMemoryChatMemory
+import org.springframework.ai.chat.memory.MessageWindowChatMemory
 import org.springframework.ai.tool.ToolCallbackProvider
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.CommandLineRunner
@@ -50,7 +50,7 @@ class McpClientApplication {
                     """.trimIndent()
                 )
                 .defaultTools(tools)
-                .defaultAdvisors(MessageChatMemoryAdvisor.builder(InMemoryChatMemory()).build())
+                .defaultAdvisors(MessageChatMemoryAdvisor.builder(MessageWindowChatMemory.builder().build()).build())
                 .build()
             println("\n>>> QUESTION: $userInput")
             println("\n>>> ASSISTANT: ${chatClient.prompt(userInput).call().content()}")
