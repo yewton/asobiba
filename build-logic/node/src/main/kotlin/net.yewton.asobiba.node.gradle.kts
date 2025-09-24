@@ -9,7 +9,7 @@ plugins {
 configure<NodeExtension> {
     download.set(true)
     version.set("20.19.5")
-    npmVersion.set("10.9.3")
+    npmVersion.set("11.6.0")
 }
 
 tasks.npmInstall {
