@@ -3,7 +3,7 @@ detekt = "1.23.8"
 kotest = "5.9.1"
 spring-doc = "2.6.0"
 therapi-runtime-javadoc = "0.15.0"
-resilience4j = "2.2.0"
+resilience4j = "2.3.0"
 
 [libraries]
 archunit-junit5 = "com.tngtech.archunit:archunit-junit5:1.4.1"
