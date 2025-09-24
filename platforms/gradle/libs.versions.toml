@@ -1,7 +1,7 @@
 [versions]
 detekt = "1.23.8"
 kotest = "5.9.1"
-spring-doc = "2.6.0"
+spring-doc = "2.8.13"
 therapi-runtime-javadoc = "0.15.0"
 resilience4j = "2.3.0"
 
