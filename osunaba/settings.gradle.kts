@@ -16,10 +16,10 @@ includeBuild("../platforms")
 
 // == Define the inner structure of this component ==
 rootProject.name = "osunaba" // the component name
-include("mondai")
-include("challenge")
+include("mondai") // https://github.com/PacktPublishing/Java-Coding-Problems
+include("challenge") // https://github.com/Apress/java-challenges
 include("reactive-webapp")
-include("jcp2")
+include("jcp2") // https://github.com/PacktPublishing/Java-Coding-Problems-Second-Edition
 include("mcp-server")
 include("mcp-client")
 include("leetcode")
