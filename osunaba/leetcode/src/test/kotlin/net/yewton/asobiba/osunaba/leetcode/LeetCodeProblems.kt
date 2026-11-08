@@ -109,4 +109,80 @@ class LeetCodeProblems : FunSpec({
             }
         }
     }
+
+    context("13. Roman to Integer") {
+        abstract class SolutionBase {
+            protected val romanMap = mapOf(
+                'I' to 1,
+                'V' to 5,
+                'X' to 10,
+                'L' to 50,
+                'C' to 100,
+                'D' to 500,
+                'M' to 1000
+            )
+            abstract fun romanToInt(s: String): Int
+        }
+
+        class Solution1Naive : SolutionBase() {
+            override fun romanToInt(s: String): Int {
+                return s.reversed().fold((0 to 'Z')) { (total, prevChar), char ->
+                    val value = romanMap[char] ?: 0
+                    when (char) {
+                        'I' -> {
+                            when (prevChar) {
+                                'V', 'X' -> (total - value) to char
+                                else -> (total + value) to char
+                            }
+                        }
+                        'X' -> {
+                            when (prevChar) {
+                                'L', 'C' -> (total - value) to char
+                                else -> (total + value) to char
+                            }
+                        }
+                        'C' -> {
+                            when (prevChar) {
+                                'D', 'M' -> (total - value) to char
+                                else -> (total + value) to char
+                            }
+                        }
+                        'V', 'L', 'D', 'M' -> (total + value) to char
+                        else -> throw IllegalArgumentException("Invalid Roman numeral: $char")
+                    }
+                }.first
+            }
+        }
+
+        class Solution2Optimized : SolutionBase() {
+            override fun romanToInt(s: String): Int {
+                return s.fold(0 to 0) { (total, prevValue), char ->
+                    val value = romanMap[char] ?: 0
+                    if (value > prevValue) {
+                        (total + value - 2 * prevValue) to value
+                    } else {
+                        (total + value) to value
+                    }
+                }.first
+            }
+        }
+
+        data class TestCase(val s: String, val expected: Int)
+
+        withData(
+            TestCase("III", 3),
+            TestCase("IV", 4),
+            TestCase("IX", 9),
+            TestCase("LVIII", 58),
+            TestCase("MCMXCIV", 1994)
+        ) { (s, expected) ->
+            withData(
+                Solution1Naive(),
+                Solution2Optimized()
+            ) { sut ->
+                val actual = sut.romanToInt(s)
+                actual shouldBe expected
+            }
+        }
+    }
 })
