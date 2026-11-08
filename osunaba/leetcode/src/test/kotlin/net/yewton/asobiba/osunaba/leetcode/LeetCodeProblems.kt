@@ -185,4 +185,58 @@ class LeetCodeProblems : FunSpec({
             }
         }
     }
+
+    context("14. Longest Common Prefix") {
+        abstract class SolutionBase {
+            abstract fun longestCommonPrefix(strs: Array<String>): String
+        }
+
+        class Solution1Naive : SolutionBase() {
+            override fun longestCommonPrefix(strs: Array<String>): String {
+                val minimumLength = strs.minOf { it.length }
+                var prefix = ""
+                for (i in 0 until minimumLength) {
+                    val char = strs[0][i]
+                    if (strs.all { it[i] == char }) {
+                        prefix += char
+                    } else {
+                        break
+                    }
+                }
+                return prefix
+            }
+        }
+
+        class Solution2Naive : SolutionBase() {
+            override fun longestCommonPrefix(strs: Array<String>): String {
+                return strs.minBy { it.length }.let { shortest ->
+                    shortest.foldIndexed(("" to true)) { index, (prefix, cont), ch ->
+                        if (cont && strs.all { it[index] == ch }) {
+                            prefix + ch to true
+                        } else {
+                            prefix to false
+                        }
+                    }
+                }.first
+            }
+        }
+
+        data class TestCase(val strs: Array<String>, val expected: String)
+
+        withData(
+            TestCase(arrayOf("flower", "flow", "flight"), "fl"),
+            TestCase(arrayOf("dog", "racecar", "car"), ""),
+            TestCase(arrayOf("interstellar", "internet", "internal"), "inter"),
+            TestCase(arrayOf("a"), "a"),
+            TestCase(arrayOf("", ""), "")
+        ) { (strs, expected) ->
+            withData(
+                Solution1Naive(),
+                Solution2Naive()
+            ) { sut ->
+                val actual = sut.longestCommonPrefix(strs)
+                actual shouldBe expected
+            }
+        }
+    }
 })
